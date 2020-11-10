@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import QuoteTable from "./quote-table.js";
+import "./Page1.css";
 
-export default function Page1() {
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-          default msg for Page1
-      </header>
+    <div className="Title">
+      <h1>ABC PLANT PARTS</h1>
+      <div className="Page">
+        <QuoteTable />
+      </div>
     </div>
   );
 }
+
+export default App;
