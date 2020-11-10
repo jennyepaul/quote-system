@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 
-import "./Page1.css"
+import "./Page1.css";
+import {
+  Button,
+  FormGroup,
+  FormControl,
+  FormLabel,
+  Form,
+} from "react-bootstrap";
 
 const _defaultCosts = [
-  {
-    name: " ",
-    price: 0
-  },
   {
     name: " ",
     price: 0
   }
 ];
 
+const _defaultDescription = {
+  description: " "
+}
+
 const QuoteTable = () => {
   const [costs, setCosts] = useState(_defaultCosts);
+
+  const[descript, setDescript] = useState(_defaultDescription);
 
   const handleCostsChange = event => {
     const _tempCosts = [...costs];
@@ -22,7 +31,6 @@ const QuoteTable = () => {
 
     setCosts(_tempCosts);
   };
-
   const addNewCost = () => {
     setCosts(prevCosts => [...prevCosts, { name: "", price: 0 }]);
   };
@@ -77,11 +85,15 @@ const QuoteTable = () => {
           </div>
           <div className="table-row">
             <div className="table-data">
-              <div>Description</div>
+              <div>Description:</div>
             </div>
+          </div>
+          <div className="table-row">
             <div className="table-data">
               <div>Secret Notes:</div>
             </div>
+          </div>
+          <div className="table-row">
             <div className="table-data">
               <div>Customer Email:</div>
             </div>
@@ -90,7 +102,7 @@ const QuoteTable = () => {
         <div className="table-footer">
           <div className="table-row">
             <div className="table-data">
-              <div>Total</div>
+              <div>Total After Discount:</div>
             </div>
             <div className="table-data">
               <div>{getTotalCosts()}</div>
@@ -98,8 +110,13 @@ const QuoteTable = () => {
           </div>
         </div>
       </div>
+      <div className="table=row">
+        <div align="centered">
+          <Button variant="danger">Finalize Quote</Button>
+        </div>
+      </div>
     </div>
-  );
+    );
 };
 
 export default QuoteTable;
