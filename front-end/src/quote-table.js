@@ -11,7 +11,7 @@ import {
 
 const _defaultCosts = [
   {
-    name: " ",
+    item_id: " ",
     price: 0
   }
 ];
@@ -32,7 +32,7 @@ const QuoteTable = () => {
     setCosts(_tempCosts);
   };
   const addNewCost = () => {
-    setCosts(prevCosts => [...prevCosts, { name: "", price: 0 }]);
+    setCosts(prevCosts => [...prevCosts, { item_id: "", price: 0 }]);
   };
 
   const getTotalCosts = () => {
@@ -63,7 +63,7 @@ const QuoteTable = () => {
                   name="name"
                   data-id={index}
                   type="text"
-                  value={item.name}
+                  value={item.item_id}
                   onChange={handleCostsChange}
                 />
               </div>
@@ -86,16 +86,37 @@ const QuoteTable = () => {
           <div className="table-row">
             <div className="table-data">
               <div>Description:</div>
+              <input
+                name="description"
+                type="text"
+              />
             </div>
           </div>
           <div className="table-row">
             <div className="table-data">
               <div>Secret Notes:</div>
+              <input
+                name="description"
+                type="text"
+              />
+            </div>
+          </div>
+          <div className="table-row">
+            <div className="table-data">
+              <div>Discount:</div>
+              <input
+                name="description"
+                type="text"
+              />
             </div>
           </div>
           <div className="table-row">
             <div className="table-data">
               <div>Customer Email:</div>
+              <input
+                name="description"
+                type="text"
+              />
             </div>
           </div>
         </div>
