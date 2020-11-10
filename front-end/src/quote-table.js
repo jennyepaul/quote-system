@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import "./Page1.css";
 import {
   Button,
@@ -9,21 +8,17 @@ import {
   Form,
 } from "react-bootstrap";
 
-const _defaultCosts = [
+const _defaultQuote = [
   {
     item_id: " ",
-    price: 0
+    price: 0,
+    discount: 0,
+    description: " "
   }
 ];
 
-const _defaultDescription = {
-  description: " "
-}
-
 const QuoteTable = () => {
-  const [costs, setCosts] = useState(_defaultCosts);
-
-  const[descript, setDescript] = useState(_defaultDescription);
+  const [costs, setCosts] = useState(_defaultQuote);
 
   const handleCostsChange = event => {
     const _tempCosts = [...costs];
@@ -31,6 +26,7 @@ const QuoteTable = () => {
 
     setCosts(_tempCosts);
   };
+
   const addNewCost = () => {
     setCosts(prevCosts => [...prevCosts, { item_id: "", price: 0 }]);
   };
@@ -40,7 +36,6 @@ const QuoteTable = () => {
       return total + Number(item.price);
     }, 0);
   };
-
   return (
     <div className="table">
       <div className="table-title">Enter a new sales quote...</div>
@@ -96,7 +91,7 @@ const QuoteTable = () => {
             <div className="table-data">
               <div>Secret Notes:</div>
               <input
-                name="description"
+                name="secret-notes"
                 type="text"
               />
             </div>
@@ -105,7 +100,7 @@ const QuoteTable = () => {
             <div className="table-data">
               <div>Discount:</div>
               <input
-                name="description"
+                name="discount"
                 type="text"
               />
             </div>
@@ -114,7 +109,7 @@ const QuoteTable = () => {
             <div className="table-data">
               <div>Customer Email:</div>
               <input
-                name="description"
+                id="customer-email"
                 type="text"
               />
             </div>
