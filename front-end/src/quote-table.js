@@ -18,7 +18,6 @@ class QuoteTable extends React.Component {
     amount: 0,
   };
 }
-
 handleSubmit = event => {
     event.preventDefault();
 //handle quote_name
@@ -203,12 +202,14 @@ render() {
       </div>
       <div className="table=row">
         <div align="centered">
+          <form onSubmit={this.handleFinalize}>
             <Button
                variant="danger"
-               type="submit"
+               href="./Page2.js"
                >
                Finalize Quote
             </Button>
+          </form>
         </div>
       </div>
     </div>
