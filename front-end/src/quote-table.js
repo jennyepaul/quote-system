@@ -27,10 +27,6 @@ const QuoteTable = () => {
     setCosts(_tempCosts);
   };
 
-  const addNewCost = () => {
-    setCosts(prevCosts => [...prevCosts, { item_id: "", price: 0 }]);
-  };
-
   const getTotalCosts = () => {
     return costs.reduce((total, item) => {
       return total + Number(item.price);
@@ -43,7 +39,7 @@ const QuoteTable = () => {
         <div className="table-header">
           <div className="table-row">
             <div className="table-data">
-              <div>Item ID</div>
+              <div>Quote Name</div>
             </div>
             <div className="table-data">
               <div>Price</div>
@@ -75,7 +71,11 @@ const QuoteTable = () => {
           ))}
           <div className="table-row">
             <div className="table-data">
-              <button onClick={addNewCost}>+</button>
+              <div>Discount:</div>
+              <input
+                name="discount"
+                type="text"
+              />
             </div>
           </div>
           <div className="table-row">
@@ -98,15 +98,6 @@ const QuoteTable = () => {
           </div>
           <div className="table-row">
             <div className="table-data">
-              <div>Discount:</div>
-              <input
-                name="discount"
-                type="text"
-              />
-            </div>
-          </div>
-          <div className="table-row">
-            <div className="table-data">
               <div>Customer Email:</div>
               <input
                 id="customer-email"
@@ -119,9 +110,6 @@ const QuoteTable = () => {
           <div className="table-row">
             <div className="table-data">
               <div>Total After Discount:</div>
-            </div>
-            <div className="table-data">
-              <div>{getTotalCosts()}</div>
             </div>
           </div>
         </div>
