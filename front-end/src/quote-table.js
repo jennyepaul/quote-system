@@ -3,24 +3,23 @@ import "./Page1.css";
 import axios from "axios";
 import {
   Button,
-  FormGroup,
-  FormControl,
-  FormLabel,
-  Form,
 } from "react-bootstrap";
 
-export default class QuoteTable extends React.Component {
-  state = {
-    quote_name: " ",
+class QuoteTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    quote_name: ' ',
     price: 0,
     discount: 0,
-    description: "",
-    secret_notes: "",
-    customer_email: "",
-    total:0
-  }
+    description: '',
+    secret_notes: '',
+    customer_email: '',
+    amount: 0,
+  };
+}
 
-handleInChange = event => {
+handleSubmit = event => {
     event.preventDefault();
 //handle quote_name
   const quote_name = {
@@ -52,37 +51,37 @@ handleInChange = event => {
     };
 
   //the following blocks of code handle the post requests
-    axios.put("http://blitz.cs.niu.edu/PurchaseOrder/", {quote_name})
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {quote_name})
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
 
-    axios.put("http://blitz.cs.niu.edu/PurchaseOrder/", {price})
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {price})
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
 
-    axios.put("http://blitz.cs.niu.edu/PurchaseOrder/", {discount})
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {discount})
       .then(res => {
       console.log(res);
       console.log(res.data);
       })
 
-    axios.put("http://blitz.cs.niu.edu/PurchaseOrder/", {description})
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {description})
       .then(res => {
       console.log(res);
       console.log(res.data);
       })
 
-    axios.put("http://blitz.cs.niu.edu/PurchaseOrder/", {secret_notes})
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {secret_notes})
       .then(res => {
       console.log(res);
       console.log(res.data);
       })
 
-    axios.put("http://blitz.cs.niu.edu/PurchaseOrder/", {customer_email})
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {customer_email})
       .then(res => {
       console.log(res);
       console.log(res.data);
@@ -91,7 +90,7 @@ handleInChange = event => {
 
 handleOutChange= (event) => {
   this.setState({
-    total: this.state.price - this.state.discount
+    amount: this.state.price - this.state.discount
   });
 }
 render() {
@@ -116,8 +115,10 @@ render() {
                 <input
                   type="text"
                   name="quote_name"
-                  onChange={this.handleInChange}
+                  value={this.state.quote_name}
+                  onChange={(event) => this.setState({quote_name: event.target.value})}
                 />
+                <button type="submit">Confirm</button>
               </form>
               </div>
               <div className="table-data">
@@ -125,8 +126,10 @@ render() {
                 <input
                   type="text"
                   name="price"
-                  onChange={this.handleInChange}
+                  value={this.state.price}
+                  onChange={(event) => this.setState({price: event.target.value})}
                   />
+                  <button type="submit">Confirm</button>
                 </form>
               </div>
             </div>
@@ -137,8 +140,10 @@ render() {
                   <input
                   type="text"
                   name="discount"
-                  onChange={this.handleInChange}
+                  value={this.state.discount}
+                  onChange={(event) => this.setState({discount: event.target.value})}
                   />
+                  <button type="submit">Confirm</button>
                 </form>
             </div>
           </div>
@@ -149,8 +154,10 @@ render() {
                 <input
                   type="text"
                   name="description"
-                  onChange={this.handleInChange}
+                  value={this.state.description}
+                  onChange={(event) => this.setState({description: event.target.value})}
                   />
+                  <button type="submit">Confirm</button>
                 </form>
             </div>
           </div>
@@ -161,8 +168,10 @@ render() {
                   <input
                   type="text"
                   name="secret_notes"
-                  onChange={this.handleInChange}
+                  value={this.state.secret_notes}
+                  onChange={(event) => this.setState({secret_notes: event.target.value})}
                   />
+                  <button type="submit">Confirm</button>
                 </form>
             </div>
           </div>
@@ -173,8 +182,10 @@ render() {
                   <input
                   type="text"
                   name="customer_email"
-                  onChange={this.handleInChange}
+                  value={this.state.customer_email}
+                  onChange={(event) => this.setState({customer_email: event.target.value})}
                   />
+                  <button type="submit">Confirm</button>
                 </form>
             </div>
           </div>
@@ -183,26 +194,26 @@ render() {
           <div className="table-row">
             <div className="table-data">
               <div>Total After Discount:</div>
-                <form onChange = {this.handleOutChange}>
+                <form onChange={this.handleOutChange}>
                 </form>
-                  <p>{this.state.total}</p>
+                  <p>{this.state.amount}</p>
             </div>
           </div>
         </div>
       </div>
       <div className="table=row">
         <div align="centered">
-          <form onSubmit={this.handleSubmit}>
             <Button
                variant="danger"
-               type="submit">
+               type="submit"
+               >
                Finalize Quote
             </Button>
-          </form>
         </div>
       </div>
     </div>
     )
   }
-
 }
+
+export default QuoteTable;
