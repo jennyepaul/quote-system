@@ -1,6 +1,4 @@
-
 import React, { useState } from "react";
-import "./Page1.css";
 
 export default function Page2() {
 return (

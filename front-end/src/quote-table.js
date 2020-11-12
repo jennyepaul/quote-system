@@ -1,9 +1,8 @@
 import React from "react";
 import "./Page1.css";
 import axios from "axios";
-import {
-  Button,
-} from "react-bootstrap";
+import { Button,} from "react-bootstrap";
+
 
 class QuoteTable extends React.Component {
   constructor(props) {
@@ -16,8 +15,10 @@ class QuoteTable extends React.Component {
     secret_notes: '',
     customer_email: '',
     amount: 0,
+    redirect: true,
   };
 }
+
 handleSubmit = event => {
     event.preventDefault();
 //handle quote_name
@@ -92,6 +93,7 @@ handleOutChange= (event) => {
     amount: this.state.price - this.state.discount
   });
 }
+
 render() {
   return (
     <div className="table">
@@ -202,14 +204,14 @@ render() {
       </div>
       <div className="table=row">
         <div align="centered">
-          <form onSubmit={this.handleFinalize}>
-            <Button
-               variant="danger"
-               href="./Page2.js"
+          <div>
+              <Button
+                variant="danger"
+                href="./Page2.js"
                >
-               Finalize Quote
-            </Button>
-          </form>
+                Finalize Quote
+              </Button>
+          </div>
         </div>
       </div>
     </div>
