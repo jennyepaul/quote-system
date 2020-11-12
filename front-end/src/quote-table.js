@@ -87,12 +87,24 @@ handleSubmit = event => {
       console.log(res.data);
       })
 }
-
-handleOutChange= (event) => {
-  this.setState({
-    amount: this.state.price - this.state.discount
-  });
-}
+handlePriceChange = (event) => {
+    this.setState({
+      price: event.target.value
+    },() =>{
+    this.setState({
+      amount: this.state.price - this.state.discount
+    });
+    });
+  }
+  handleDiscountChange = (event) => {
+      this.setState({
+        discount: event.target.value
+      },() => {
+      this.setState({
+        amount: this.state.price - this.state.discount
+      });
+      });
+    }
 
 render() {
   return (
@@ -128,7 +140,7 @@ render() {
                   type="text"
                   name="price"
                   value={this.state.price}
-                  onChange={(event) => this.setState({price: event.target.value})}
+                  onChange={this.handlePriceChange}
                   />
                   <button type="submit">Confirm</button>
                 </form>
@@ -142,7 +154,7 @@ render() {
                   type="text"
                   name="discount"
                   value={this.state.discount}
-                  onChange={(event) => this.setState({discount: event.target.value})}
+                  onChange={this.handleDiscountChange}
                   />
                   <button type="submit">Confirm</button>
                 </form>
@@ -195,8 +207,6 @@ render() {
           <div className="table-row">
             <div className="table-data">
               <div>Total After Discount:</div>
-                <form onChange={this.handleOutChange}>
-                </form>
                   <p>{this.state.amount}</p>
             </div>
           </div>
