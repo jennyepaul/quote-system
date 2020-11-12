@@ -217,7 +217,7 @@ render() {
           <div>
               <Button
                 variant="danger"
-                href="./Page2.js"
+                href="./Page2"
                >
                 Finalize Quote
               </Button>
