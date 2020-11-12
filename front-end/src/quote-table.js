@@ -32,22 +32,22 @@ handleSubmit = event => {
 
 //handle quote discount
   const discount = {
-    price: this.state.price
+    discount: this.state.discount
   };
 
 //handle quote description
   const description = {
-      price: this.state.description
+      description: this.state.description
     };
 
 //handle quote secret note
   const secret_notes = {
-      price: this.state.secret_notes
+      secret_notes: this.state.secret_notes
     };
 
 //handle customer email attached to quote
   const customer_email = {
-      price: this.state.customer_email
+      customer_email: this.state.customer_email
     };
 
   //the following blocks of code handle the post requests
