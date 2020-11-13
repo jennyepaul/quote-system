@@ -2,7 +2,7 @@ var express = require('express');
 var mysql = require('mysql');
 
 var connect = mysql.createConnection ({
-	host: 'blitz.cs.niu.edu';
+	host: 'blitz.cs.niu.edu',
 	user: 'student',
 	password: 'student',
 	database: 'csci463'
@@ -18,15 +18,16 @@ connection.connect() (function(error) {
 
 app.get('/', function(req,resp) {
 
-	connection.query("SELECT * FROM csci467", function(error, rows, fields)
-		if (!!error) {
+	connection.query("SELECT * FROM parts", function(error, rows, fields)
+
+		if (err) {
 			console.log('Error in the query');
 		} else {
 			console.log('Sucessful');
-			colsole.log(rows);
+			console.log(rows);
 		}
 	});
-});
+)
 
 app.listen(1337);
 
