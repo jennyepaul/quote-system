@@ -1,18 +1,21 @@
 import React from "react";
-import "./Page1.css";
+import "./Page2.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
 
 
-class QuoteTable extends React.Component {
+class QuoteTable2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     quote_name: ' ',
     price: 0,
+    discount: 0,
     description: '',
     secret_notes: '',
     customer_email: '',
+    amount: 0,
+    redirect: true,
   };
 }
 
@@ -25,6 +28,11 @@ handleSubmit = event => {
 //handle quote price
   const price = {
     price: this.state.price
+  };
+
+//handle quote discount
+  const discount = {
+    discount: this.state.discount
   };
 
 //handle quote description
@@ -53,6 +61,12 @@ handleSubmit = event => {
       .then(res => {
         console.log(res);
         console.log(res.data);
+      })
+
+    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {discount})
+      .then(res => {
+      console.log(res);
+      console.log(res.data);
       })
 
     axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {description})
@@ -95,7 +109,7 @@ handlePriceChange = (event) => {
 render() {
   return (
     <div className="table">
-      <div className="table-title">Enter a new sales quote...</div>
+      <div className="table-title">Edit & Finalize Quote...</div>
       <div className="table-content">
         <div className="table-header">
           <div className="table-row">
@@ -132,6 +146,20 @@ render() {
                 </form>
               </div>
             </div>
+          <div className="table-row">
+            <div className="table-data">
+              <div>Discount:</div>
+                <form onSubmit={this.handleSubmit}>
+                  <input
+                  type="text"
+                  name="discount"
+                  value={this.state.discount}
+                  onChange={this.handleDiscountChange}
+                  />
+                  <button type="submit">Confirm</button>
+                </form>
+            </div>
+          </div>
           <div className="table-row">
             <div className="table-data">
               <div>Description:</div>
@@ -175,22 +203,38 @@ render() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="table=row">
-        <div align="centered">
-          <div>
-              <Button
-                variant="danger"
-                href="./Page2"
-               >
-                Finalize Quote
-              </Button>
+        <div className="table-footer">
+          <div className="table-row">
+            <div className="table-data">
+              <div>Total After Discount:</div>
+                  <p>{this.state.amount}</p>
+            </div>
           </div>
         </div>
       </div>
+      <div className="table=row">
+          <div className="floated">
+            <div>
+              <Button
+                variant="success"
+               >
+              SANCTIONED
+              </Button>
+            </div>
+        </div>
+        <div className="floated">
+            <div>
+                <Button
+                  variant="danger"
+                 >
+                UNRESOLVED
+                </Button>
+            </div>
+        </div>
     </div>
+  </div>
     )
   }
 }
 
-export default QuoteTable;
+export default QuoteTable2;
