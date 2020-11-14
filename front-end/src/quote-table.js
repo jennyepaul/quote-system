@@ -4,7 +4,6 @@ import "./Page1.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
 
-
 class QuoteTable extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +14,17 @@ class QuoteTable extends React.Component {
     secret_notes: '',
     customer_email: '',
   };
+}
+
+//get the info/data from api 
+componentDidMount = event => {
+axios.get('http://blitz.cs.niu.edu/PurchaseOrder/')
+    .then(response => {
+      console.log(response.data);
+  })
+    .catch(error => {
+      console.log(error);
+  });
 }
 
 handleSubmit = event => {
