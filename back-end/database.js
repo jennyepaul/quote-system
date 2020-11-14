@@ -1,35 +1,28 @@
 var express = require('express');
 var mysql = require('mysql');
 
-var connect = mysql.createConnection ({
+var connection = mysql.createConnection ({
 	host: 'blitz.cs.niu.edu',
 	user: 'student',
 	password: 'student',
 	database: 'csci463'
 });
 
-connection.connect() (function(error) {
-	if (!!error) {
-		console.log('Error');
-	} else {
-		console.log('Connected');
-	}
-});
+connection.connect();
 
-//app.get('/', function(req,resp) {
 
 module.exports = {
 	getAll: async result => {	
-	connection.query("SELECT * FROM parts", function(error, rows, fields) {
+	connection.query('SELECT * FROM parts', function(error, rows, fields) {
 
 		if (!!error) 
 			console.log('Error in query');
 
 		console.log('Sucessful');
-		console.log(rows);
+//		console.log(rows);
 		});
 	}
 }
 
-//app.listen(1337);
+
 
