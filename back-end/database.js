@@ -16,18 +16,20 @@ connection.connect() (function(error) {
 	}
 });
 
-app.get('/', function(req,resp) {
+//app.get('/', function(req,resp) {
 
-	connection.query("SELECT * FROM parts", function(error, rows, fields)
+module.exports = {
+	getAll: async result => {	
+	connection.query("SELECT * FROM parts", function(error, rows, fields) {
 
-		if (err) {
-			console.log('Error in the query');
-		} else {
-			console.log('Sucessful');
-			console.log(rows);
-		}
-	});
-)
+		if (!!error) 
+			console.log('Error in query');
 
-app.listen(1337);
+		console.log('Sucessful');
+		console.log(rows);
+		});
+	}
+}
+
+//app.listen(1337);
 
