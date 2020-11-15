@@ -3,11 +3,10 @@ const sql = require("./db.js");
 
 // constructor
 const Parts = function(parts) {
-  this.number = part.number;
-  this.description = part.description;
-  this.price = part.price;
-  this.weight = part.weight;
-  this.pictureURL = part.pictureURL;
+  this.number = parts.number;
+  this.description = parts.description;
+  this.price = parts.price;
+  this.weight = parts.weight;
 };
 
 //insert new part into DB
@@ -59,10 +58,10 @@ Parts.getAll = result => {
 };
 
 //update part
-Parts.updateByNumber = (id, customer, result) => {
+Parts.updateByNumber = (number, parts, result) => {
   sql.query(
     "UPDATE parts SET description = ?, price = ?, weight = ? WHERE number = ?",
-    [part.description, part.price, part.weight, number],
+    [parts.description, parts.price, parts.weight, number],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -76,8 +75,8 @@ Parts.updateByNumber = (id, customer, result) => {
         return;
       }
 
-      console.log("updated part: ", { number: number, ...part });
-      result(null, { number: number, ...part });
+      console.log("updated part: ", { number: number, ...parts });
+      result(null, { number: number, ...parts });
     }
   );
 };
