@@ -1,3 +1,4 @@
+//created by Jennifer Paul:11/15/20
 const sql = require("./db.js");
 
 // constructor

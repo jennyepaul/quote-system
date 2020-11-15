@@ -14,6 +14,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to quote-system application." });
 });
 
+require("./app/routes/customer.routes.js")(app);
+require("./app/routes/parts.routes.js")(app);
+
 // set port, listen for requests
 app.listen(3001, () => {
   console.log("Server is running on port 3001.");
