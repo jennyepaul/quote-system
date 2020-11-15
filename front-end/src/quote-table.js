@@ -16,7 +16,7 @@ class QuoteTable extends React.Component {
   };
 }
 
-//get the info/data from api 
+//get the info/data from api
 componentDidMount = event => {
 axios.get('http://blitz.cs.niu.edu/PurchaseOrder/')
     .then(response => {
@@ -54,35 +54,34 @@ handleSubmit = event => {
     };
 
   //the following blocks of code handle the post requests
-    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {quote_name})
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-
-    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {price})
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-
-    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {description})
-      .then(res => {
+  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {quote_name})
+    .then(res => {
       console.log(res);
       console.log(res.data);
-      })
-
-    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {secret_notes})
-      .then(res => {
+    })
+  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {price})
+    .then(res => {
       console.log(res);
       console.log(res.data);
-      })
+    })
 
-    axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {customer_email})
-      .then(res => {
-      console.log(res);
-      console.log(res.data);
-      })
+  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {description})
+    .then(res => {
+    console.log(res);
+    console.log(res.data);
+    })
+
+  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {secret_notes})
+    .then(res => {
+    console.log(res);
+    console.log(res.data);
+    })
+
+  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {customer_email})
+    .then(res => {
+    console.log(res);
+    console.log(res.data);
+    })
 }
 handlePriceChange = (event) => {
     this.setState({
