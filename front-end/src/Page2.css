@@ -1,6 +1,7 @@
 /*created by Jennifer Paul
-/* 11/9/2020
+/* 11/13/2020
 */
+
 .Title {
 	box-sizing: border-box;
 	width: 100%;
@@ -104,4 +105,9 @@ table {
 .table-data {
   padding: 0.75rem 1rem;
   flex: 1 0 auto;
+}
+
+.floated {
+   float:left;
+   margin-right:5px;
 }

@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+//created by Jennifer Paul: 11/13/20
+import React from "react";
+import QuoteTable2 from "./quote-table2.js";
+import "./Page2.css";
 
-export default function Page2() {
-return (
-  <div className="App">
-    <header className="App-header">
-        default msg for Page2
-    </header>
-  </div>
-);
+function App() {
+  return (
+    <div className="Title">
+      <h1>ABC PLANT PARTS</h1>
+      <div className="Page">
+        <QuoteTable2 />
+      </div>
+    </div>
+  );
 }
+export default App;
