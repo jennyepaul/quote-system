@@ -9,6 +9,7 @@ const Associate = function(associate) {
   this.address = associate.address;
 };
 
+//create a new associate
 Associate.create = (newAssociate, result) => {
   sql.query("INSERT INTO salesAssociate SET ?", newAssociate, (err, res)  =>{
     if (err) {
@@ -23,7 +24,7 @@ Associate.create = (newAssociate, result) => {
 
 };
 
-
+//find an associated by their id
 Associate.findById = (associateId, result) => {
   sql.query(`SELECT * FROM salesAssociate WHERE id = ${associateId}`, (err, res) => {
     if (err) {
@@ -38,11 +39,12 @@ Associate.findById = (associateId, result) => {
       return;
     }
 
-    // not found Customer with the id
+    // not found associate with the id
     result({ kind: "not_found" }, null);
   });
 };
 
+//get all the associates in the database
 Associate.getAll = result => {
   sql.query("SELECT * FROM salesAssociate", (err, res) => {
     if (err) {
@@ -56,6 +58,7 @@ Associate.getAll = result => {
   });
 };
 
+//update an associate found by their id
 Associate.updateById = (id, associate, result) => {
   sql.query(
     "UPDATE salesAssociate SET name = ?, password = ?, commission = ?, address = ? WHERE id = ?",
@@ -68,7 +71,7 @@ Associate.updateById = (id, associate, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Customer with the id
+        // not found associate with the id
         result({ kind: "not_found" }, null);
         return;
       }
