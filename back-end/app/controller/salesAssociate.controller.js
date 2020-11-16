@@ -26,7 +26,7 @@ exports.create = (req, res) => {
            err.message || "Some error occurred while creating the associate."
        });
      //else res.send(data);
-     else res.json({data:associate});
+     else res.send(data);
    });
 };
 
