@@ -218,6 +218,7 @@ render() {
             <div>
               <Button
                 variant="success"
+               
                >
               SANCTIONED
               </Button>
@@ -227,12 +228,26 @@ render() {
             <div>
                 <Button
                   variant="danger"
+                 
                  >
                 UNRESOLVED
                 </Button>
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <div className="floated">
+          <div>
+            <Button 
+             href="./Page3"
+            >
+              Next Page
+            </Button>
+          </div>
+            
+        </div>  
   </div>
     )
   }
