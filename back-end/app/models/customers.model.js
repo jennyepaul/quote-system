@@ -1,5 +1,5 @@
 //created by Jennifer Paul:11/15/20
-const sql = require("./db.js");
+const sql = require("./blitzdb.js");
 
 // constructor
 const Customer = function(customer) {
