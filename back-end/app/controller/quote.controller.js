@@ -18,7 +18,8 @@ exports.create = (req, res) => {
      customer_email: req.body.customer_email,
      discount: req.body.discount,
      price: req.body.price,
-     sanctioned_unresolved: req.body.sanctioned_unresolved
+     sanctioned_unresolved: req.body.sanctioned_unresolved,
+     final_price: req.body.final_price
    });
 
    // Save quotes in the database
