@@ -1,6 +1,6 @@
 module.exports = {
-  HOST: "blitz.cs.niu.edu",
-  USER: "student",
-  PASSWORD: "student",
+  HOST: "ec2-3-139-163-138.us-east-2.compute.amazonaws.com",
+  USER: "jp-niu",
+  PASSWORD: "Jpniu11162020!",
   DB: "csci467"
 };
