@@ -13,4 +13,10 @@ module.exports = app => {
   // Update an associate with their ID
   app.put("/associate/:associateId", associate.update);
 
+  // Delete an associate with customerId
+  app.delete("/associate/:associateId", associate.delete);
+
+  // Delete associates
+  app.delete("/associate", associate.deleteAll);
+
 };

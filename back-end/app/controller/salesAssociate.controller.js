@@ -86,3 +86,32 @@ exports.update = (req, res) => {
      }
    );
 };
+
+//delete associate based on id
+exports.delete = (req, res) => {
+  Associate.remove(req.params.associateId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found associate with id ${req.params.associateId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not delete associate with id " + req.params.associateId
+        });
+      }
+    } else res.send({ message: `Associate was deleted successfully!` });
+  });
+};
+
+//delete all the associates
+exports.deleteAll = (req, res) => {
+  Associate.removeAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while removing all associates."
+      });
+    else res.send({ message: `All associates were deleted successfully!` });
+  });
+};

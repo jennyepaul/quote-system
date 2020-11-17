@@ -82,4 +82,37 @@ Associate.updateById = (id, associate, result) => {
   );
 };
 
+//remove just one associate
+Associate.remove = (id, result) => {
+  sql.query("DELETE FROM salesAssociate WHERE id = ?", id, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows == 0) {
+      // not found Customer with the id
+      result({ kind: "not_found" }, null);
+      return;
+    }
+
+    console.log("deleted associate with id: ", id);
+    result(null, res);
+  });
+};
+
+//remove all associates in the table
+Associate.removeAll = result => {
+  sql.query("DELETE FROM salesAssociate", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log(`deleted ${res.affectedRows} associate`);
+    result(null, res);
+  });
+};
 module.exports = Associate;
