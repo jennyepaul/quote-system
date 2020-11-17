@@ -1,3 +1,4 @@
+//written by Jennifer Paul: 11/16/20
 const Associate = require("../models/salesAssociate.model.js");
 
 // Create and Save a new associate

@@ -1,3 +1,4 @@
+//written by Jennifer Paul: 11/16/20
 const Quote = require("../models/quote.model.js");
 
 // Create and Save a new quote
