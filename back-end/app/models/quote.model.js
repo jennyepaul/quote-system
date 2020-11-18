@@ -67,7 +67,7 @@ Quote.getAll = result => {
 Quote.updateById = (id, quote, result) => {
   sql.query(
     "UPDATE quote SET name = ?, secret_notes = ?, customer_email = ?, discount = ?, price = ?, sanctioned_unresolved = ?, final_price = ?, description = ? WHERE id = ?",
-    [quote.name, quote.secret_notes, quote.customer_email, quote.discount, quote.price, quote.sanctioned_unresolved, quote.final_price,, quote.description, id],
+    [quote.name, quote.secret_notes, quote.customer_email, quote.discount, quote.price, quote.sanctioned_unresolved, quote.final_price, quote.description, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
