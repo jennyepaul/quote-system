@@ -11,6 +11,7 @@ const Quote = function(quote) {
   this.price = quote.price;
   this.sanctioned_unresolved = quote.sanctioned_unresolved;
   this.final_price = quote.final_price;
+  this.description = quote.description;
 };
 
 //create a new quote
@@ -65,8 +66,8 @@ Quote.getAll = result => {
 //update a quote found by their id
 Quote.updateById = (id, quote, result) => {
   sql.query(
-    "UPDATE quote SET name = ?, secret_notes = ?, customer_email = ?, discount = ?, price = ?, sanctioned_unresolved = ?, final_price = ? WHERE id = ?",
-    [quote.name, quote.secret_notes, quote.customer_email, quote.discount, quote.price, quote.sanctioned_unresolved,quote.final_price ,id],
+    "UPDATE quote SET name = ?, secret_notes = ?, customer_email = ?, discount = ?, price = ?, sanctioned_unresolved = ?, final_price = ?, description = ? WHERE id = ?",
+    [quote.name, quote.secret_notes, quote.customer_email, quote.discount, quote.price, quote.sanctioned_unresolved, quote.final_price,, quote.description, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

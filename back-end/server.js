@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const axios = require("axios");
 
 const app = express();
 
@@ -12,6 +13,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to quote-system application." });
+});
+
+//add in access control
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next()
 });
 
 require("./app/routes/salesAssociate.routes.js")(app);
