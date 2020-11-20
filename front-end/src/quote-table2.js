@@ -3,6 +3,7 @@ import React from "react";
 import "./Page2.css";
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import emailjs from "emailjs-com";
 
 class QuoteTable2 extends React.Component {
   constructor(props) {
@@ -20,6 +21,26 @@ class QuoteTable2 extends React.Component {
       redirect: true,
     };
   }
+
+  sendEmail = (e) => {
+    e.preventDefault();
+    
+    emailjs
+      .sendForm(
+        "service_600dn2o",
+        "template_t2k8c7f",
+        e.target,
+        "user_QsIdHra0fgorqNc7Le7iG"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -75,152 +96,169 @@ class QuoteTable2 extends React.Component {
   render() {
     return (
       <div className="table">
-        <div className="table-title">Edit & Finalize Quote...</div>
-        <div className="table-content">
-          <div className="table-header">
-            <div className="table-row">
-              <div className="table-data">
-                <div>Add New Quote</div>
+        <form className="contact-form" onSubmit={this.sendEmail}>
+          <div className="table-title">Edit & Finalize Quote...</div>
+          <div className="table-content">
+            <div className="table-header">
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Add New Quote</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="table-body">
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Quote Name</div>
+
+                  <input
+                    type="text"
+                    name="quote_name"
+                    value={this.state.quote_name}
+                    onChange={(event) =>
+                      this.setState({ quote_name: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Discount:</div>
+
+                  <input
+                    type="text"
+                    name="discount"
+                    value={this.state.discount}
+                    onChange={this.handleDiscountChange}
+                  />
+                </div>
+              </div>
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Description:</div>
+
+                  <input
+                    type="text"
+                    name="description"
+                    value={this.state.description}
+                    onChange={(event) =>
+                      this.setState({ description: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Secret Notes:</div>
+
+                  <input
+                    type="text"
+                    name="secret_notes"
+                    value={this.state.secret_notes}
+                    onChange={(event) =>
+                      this.setState({ secret_notes: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Customer Email:</div>
+
+                  <input
+                    type="text"
+                    name="customer_email"
+                    value={this.state.customer_email}
+                    onChange={(event) =>
+                      this.setState({ customer_email: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Price</div>
+
+                  <input
+                    type="text"
+                    name="price"
+                    value={this.state.price}
+                    onChange={this.handlePriceChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="table-footer">
+              <div className="table-row">
+                <div className="table-data">
+                  <div>Total After Discount(Final Price):</div>
+                  <p>{this.state.amount}</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="table-body">
-            <div className="table-row">
-              <div className="table-data">
-                <div>Quote Name</div>
-
-                <input
-                  type="text"
-                  name="quote_name"
-                  value={this.state.quote_name}
-                  onChange={(event) =>
-                    this.setState({ quote_name: event.target.value })
+          <div className="table=row">
+            <div className="floated">
+              <div>
+                <Button
+                  variant="success"
+                  onClick={(event) =>
+                    this.setState({
+                      sanctioned_unresolved: "SANCTIONED",
+                      final_price: this.state.amount,
+                    })
                   }
-                />
+                >
+                  SANCTIONED
+                </Button>
               </div>
             </div>
-
-            <div className="table-row">
-              <div className="table-data">
-                <div>Discount:</div>
-
-                <input
-                  type="text"
-                  name="discount"
-                  value={this.state.discount}
-                  onChange={this.handleDiscountChange}
-                />
-              </div>
-            </div>
-            <div className="table-row">
-              <div className="table-data">
-                <div>Description:</div>
-
-                <input
-                  type="text"
-                  name="description"
-                  value={this.state.description}
-                  onChange={(event) =>
-                    this.setState({ description: event.target.value })
+            <div className="floated">
+              <div>
+                <Button
+                  variant="danger"
+                  onClick={(event) =>
+                    this.setState({
+                      sanctioned_unresolved: "UNRESOLVED",
+                      final_price: this.state.amount,
+                    })
                   }
-                />
-              </div>
-            </div>
-            <div className="table-row">
-              <div className="table-data">
-                <div>Secret Notes:</div>
-
-                <input
-                  type="text"
-                  name="secret_notes"
-                  value={this.state.secret_notes}
-                  onChange={(event) =>
-                    this.setState({ secret_notes: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="table-row">
-              <div className="table-data">
-                <div>Customer Email:</div>
-
-                <input
-                  type="text"
-                  name="customer_email"
-                  value={this.state.customer_email}
-                  onChange={(event) =>
-                    this.setState({ customer_email: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="table-row">
-              <div className="table-data">
-                <div>Price</div>
-
-                <input
-                  type="text"
-                  name="price"
-                  value={this.state.price}
-                  onChange={this.handlePriceChange}
-                />
+                >
+                  UNRESOLVED
+                </Button>
               </div>
             </div>
           </div>
-          <div className="table-footer">
-            <div className="table-row">
-              <div className="table-data">
-                <div>Total After Discount(Final Price):</div>
-                <p>{this.state.amount}</p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="table=row">
+          <br /> <br /> <br />
           <div className="floated">
             <div>
-              <Button
-                variant="success"
-                onClick={(event) =>
-                  this.setState({
-                    sanctioned_unresolved: "SANCTIONED",
-                    final_price: this.state.amount,
-                  })
-                }
+              {/* <Button value="Send" type="submit" onClick={this.sendEmail}>Add Quote</Button> */}
+              <Button 
+              variant="warning" 
+              type="submit"
+              value={this.state.final_price}
+              // onClick={(event) =>
+              //   this.setState({
+              //     final_price: 5,
+              //   })
+              // }
               >
-                SANCTIONED
+                Send Quote Email
               </Button>
             </div>
           </div>
+          <br />
+          <br />
+          <br />
           <div className="floated">
             <div>
-              <Button
-                variant="danger"
-                onClick={(event) =>
-                  this.setState({
-                    sanctioned_unresolved: "UNRESOLVED",
-                    final_price: this.state.amount,
-                  })
-                }
-              >
-                UNRESOLVED
-              </Button>
+              {/* <Button value="Send" type="submit" onClick={this.sendEmail}>Add Quote</Button> */}
+              <Button onClick={this.handleSubmit}>Add Quote</Button>
             </div>
           </div>
-        </div>
-        <br /> <br /> <br />
-        <div className="floated">
-          <div>
-            <Button onClick={this.handleSubmit}>Add Quote</Button>
-          </div>
-        </div>
-        {/* <br /> <br /> <br />
-        <div className="floated">
-          <div>
-            <Button href="./Page3">Next Page</Button>
-          </div>
-        </div> */}
+        </form>
       </div>
     );
   }
