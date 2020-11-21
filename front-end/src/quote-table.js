@@ -3,7 +3,7 @@ import React from "react";
 import "./Page1.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
-import emailjs from "emailjs-com";
+//import emailjs from "emailjs-com";
 
 class QuoteTable extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class QuoteTable extends React.Component {
 }
 
 handleSubmit = (event) => {
-	even.preventDefault();
+	event.preventDefault();
 
 	axios ({
 	  method: "post",
@@ -225,12 +225,20 @@ render() {
       <div className="table=row">
 	  <div align ="left">
 	   <div>
-	    <Button onClick={handleSubmit}>Finalize Quote</Button>
+	    <Button>Finalize Quote</Button>
 	   </div>
 	  <div align="right">
 	   <div>
 	     <Button variant="secondary" href="./Page2">Next Page</Button>
-	   </div> 
+	   </div>
+	  </div>
+	 </div>
+	</div>
+      </div>
+  )
+}
+}
+export default QuoteTable;
 //        <div align="centered">
 //          <div>
 //              <Button
@@ -242,9 +250,8 @@ render() {
 //          </div>
 //        </div>
 //      </div>
-    </div>
-    )
-  }
-}
-
-export default QuoteTable;
+//    </div>
+//  )
+//}
+//
+//export default QuoteTable;
