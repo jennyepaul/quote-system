@@ -17,12 +17,11 @@ class QuoteTable extends React.Component {
   };
 }
 
-handleSubmit = (event) => {
+   handleSubmit = (event) => {
 	event.preventDefault();
-
 	axios ({
 	  method: "post",
-	  url: "http://localhost:3000/quote/",
+	  url: "http://localhost:3001/quote/",
 	  data: {
              name: this.state.quote_name,
              description: this.state.description,
@@ -40,16 +39,6 @@ handleSubmit = (event) => {
 	  }
 	);
        };
-
-  handleDiscountChange = (event) => {
-      this.setState({
-        discount: event.target.value
-      },() => {
-      this.setState({
-        amount: this.state.price - this.state.discount
-      });
-      });
-    }
 
 
 /*get the info/data from api
@@ -225,7 +214,7 @@ render() {
       <div className="table=row">
 	  <div align ="left">
 	   <div>
-	    <Button>Finalize Quote</Button>
+	    <Button variant="danger" onClick={this.handleSubmit}>Finalize Quote</Button>
 	   </div>
 	  <div align="right">
 	   <div>
