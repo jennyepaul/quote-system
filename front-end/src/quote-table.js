@@ -39,6 +39,17 @@ class QuoteTable extends React.Component {
 	  }
 	);
        };
+	
+handlePriceChange = (event) => {
+    this.setState({
+      price: event.target.value
+    },() =>{
+    this.setState({
+      amount: this.state.price - this.state.discount
+    });
+    });
+  }
+
 
 
 /*get the info/data from api
