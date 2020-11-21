@@ -26,7 +26,7 @@ handleSubmit = (event) => {
 	  data: {
              name: this.state.quote_name,
              description: this.state.description,
-             secret notes: this.state.secret_noes,
+             secret notes: this.state.secret_notes,
              customer_email: this.state.customer_email,
              price: this.state.price,
 	  },
