@@ -3,6 +3,7 @@ import React from "react";
 import "./Page1.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
+import emailjs from "emailjs-com";
 
 class QuoteTable extends React.Component {
   constructor(props) {
@@ -16,10 +17,45 @@ class QuoteTable extends React.Component {
   };
 }
 
-//get the info/data from api
+handleSubmit = (event) => {
+	even.preventDefault();
+
+	axios ({
+	  method: "post",
+	  url: "http://localhost:3000/quote/",
+	  data: {
+             name: this.state.quote_name,
+             description: this.state.description,
+             secret notes: this.state.secret_noes,
+             customer_email: this.state.customer_email,
+             price: this.state.price,
+	  },
+	}).then(
+	  (response) => {
+		  console.log(response);
+		  window.location.reload();
+	  },
+	  (error) => {
+		  console.log(error);
+	  }
+	);
+       };
+
+  handleDiscountChange = (event) => {
+      this.setState({
+        discount: event.target.value
+      },() => {
+      this.setState({
+        amount: this.state.price - this.state.discount
+      });
+      });
+    }
+
+
+/*get the info/data from api
 componentDidMount = event => {
 axios.get('http://blitz.cs.niu.edu/PurchaseOrder/')
-    .then(response => {
+   .then(response => {
       console.log(response.data);
   })
     .catch(error => {
@@ -100,7 +136,7 @@ handlePriceChange = (event) => {
         amount: this.state.price - this.state.discount
       });
       });
-    }
+    }*/
 
 render() {
   return (
@@ -187,16 +223,24 @@ render() {
         </div>
       </div>
       <div className="table=row">
-        <div align="centered">
-          <div>
-              <Button
-                variant="danger"
-                href="./Page2"
-               >
-                Finalize Quote
-              </Button>
-          </div>
-        </div>
+	  <div align ="left">
+	   <div>
+	    <Button onClick={handleSubmit}>Finalize Quote</Button>
+	   </div>
+	  <div align="right">
+	   <div>
+	     <Button variant="secondary" href="./Page2">Next Page</Button>
+	   </div> 
+//        <div align="centered">
+//          <div>
+//              <Button
+//                variant="danger"
+//                href="./Page2"
+//               >
+//                Finalize Quote
+//              </Button>
+//          </div>
+//        </div>
       </div>
     </div>
     )
