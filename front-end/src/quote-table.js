@@ -156,26 +156,26 @@ render() {
         <div className="table-body">
             <div className="table-row">
               <div className="table-data">
-               <form onSubmit={this.handleSubmit}>
+	 
                 <input
                   type="text"
                   name="quote_name"
                   value={this.state.quote_name}
                   onChange={(event) => this.setState({quote_name: event.target.value})}
                 />
-                <button type="submit">Confirm</button>
-              </form>
-              </div>
+
+
+	     </div>
               <div className="table-data">
-               <form onSubmit={this.handleSubmit}>
+	
                 <input
-                  type="text"
+	  	    type="text"
                   name="price"
                   value={this.state.price}
                   onChange={this.handlePriceChange}
-                  />
-                  <button type="submit">Confirm</button>
-                </form>
+                   />
+
+
               </div>
             </div>
           <div className="table-row">
