@@ -181,43 +181,43 @@ render() {
           <div className="table-row">
             <div className="table-data">
               <div>Description:</div>
-                <form onSubmit={this.handleSubmit}>
+
                 <input
                   type="text"
                   name="description"
                   value={this.state.description}
                   onChange={(event) => this.setState({description: event.target.value})}
                   />
-                  <button type="submit">Confirm</button>
-                </form>
+
+
             </div>
           </div>
           <div className="table-row">
             <div className="table-data">
               <div>Secret Notes:</div>
-                <form onSubmit={this.handleSubmit}>
+
                   <input
                   type="text"
                   name="secret_notes"
                   value={this.state.secret_notes}
                   onChange={(event) => this.setState({secret_notes: event.target.value})}
                   />
-                  <button type="submit">Confirm</button>
-                </form>
+
+
             </div>
           </div>
           <div className="table-row">
             <div className="table-data">
               <div>Customer Email:</div>
-                <form onSubmit={this.handleSubmit}>
+
                   <input
                   type="text"
                   name="customer_email"
                   value={this.state.customer_email}
                   onChange={(event) => this.setState({customer_email: event.target.value})}
                   />
-                  <button type="submit">Confirm</button>
-                </form>
+
+
             </div>
           </div>
         </div>
