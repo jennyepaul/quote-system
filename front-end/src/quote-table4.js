@@ -44,7 +44,7 @@ class QuoteTable4 extends React.Component {
 	});
     };
     
-    componentWillMount() {
+    componentWillMount() { //keep getting an error here saying it expected a ';'not sure if I can use this function
  	   this.getData();
     }
 
