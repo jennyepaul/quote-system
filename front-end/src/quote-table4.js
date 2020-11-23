@@ -5,20 +5,18 @@ import axios from "axios";
 //import emailjs from "emailjs-com";
 
 class QuoteTable4 extends React.Component {
-  constructor(props) {
-    super(props);
     state = {
       query: '',
     results: {},
     filteredDate: []	    
     };
-	
+ 	
     handleInputChange = event => {
 	    const query = event.target.value;
 
 	    this.setState(prevState=> {
 		    const filteredData = prevState.data.filter(element => {
-			    return element.name.toLowerCase().includes(query.toLowerCase());
+			    return element.id.includes(query);
 		    });
 
 		    return {
@@ -30,11 +28,11 @@ class QuoteTable4 extends React.Component {
 
     getData = () => {
       axios.get('http://localhost:3001/quote/')
-	.then(res => //I dont know what to put here 
+	.then(response => console.log(response))
 	.then(data => {
 		const { query } = this.state;
 		const filteredData = data.filter(element => {
-			return element.name.toLowerCase().includes(query.toLowerCase());
+			return element.id.includes(query);
 		});
 
 		this.setState({
@@ -44,8 +42,8 @@ class QuoteTable4 extends React.Component {
 	});
     };
     
-    componentWillMount() { //keep getting an error here saying it expected a ';'not sure if I can use this function
- 	   this.getData();
+    componentWillMount() { 
+   	   this.getData();
     }
 
 render() {
