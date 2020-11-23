@@ -7,9 +7,14 @@ class QuoteTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    finalDiscount: 0,
+    discount: 0,
+    price: 0,
     finalprice: 0,
     quote_name: '',
+    order: '',
+    associate: '',
+    custid: '',
+    amount: 0,
   };
 }
 
@@ -26,50 +31,84 @@ axios.get('http://blitz.cs.niu.edu/PurchaseOrder/')
 
 handleSubmit = event => {
     event.preventDefault();
-//handle final discount
-const finalDiscount = {
-    finalDiscount: this.state.finalDiscount
-  };
+    const id = {
+        id: this.state.id
+    }
+    const discount = {
+        discount: this.state.discount
+    }
+    const associate = {
+        associate: this.state.associate
+    }
+    const custid = {
+        custid: this.state.custid
+    }
+    const amount = {
+        amount: this.state.amount
+    }
+    const order = {
+        order: this.state.order
+    }
+    const price = {
+        price: this.state.price
+    }
+
+  const finalDiscount = {
+      finalDiscount: this.state.finalDiscount
+  }
 //handle final price
   const finalPrice = {
-    finalPrice: this.state.finallPrice
+    finalPrice: this.state.finalPrice
   };
 //handle quote name
   const quote_name = {
     quote_name: this.state.quote_name
   };
-  //the following blocks of code handle the post requests
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {finalDiscount})
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {finalPrice})
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {finalDiscount, finalPrice, quote_name})
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
+  //the following blocks of code handle the post/put requests
+  axios({
+    method: "put",
+    url:    "http://localhost:3001/quote/" + id,
+    data: {
+         discount: discount,
+         price: price,
+         finalPrice: finalPrice,
+    },
+  }).then(
+    (response) => {
+        console.log(response);
+        window.location.reload();
+    },
+    (error) => {
+        console.log(error);
+        }
+    );
+
+  axios({
+      method: "post",
+      url: "http://blitz.cs.niu.edu/PurchaseOrder/",
+      data: {
+        order: order,
+        associate: associate,
+        custid: custid,
+        amount: amount,
+      }
+  })
 }
-handlePriceChange = (event) => {
+  handlePriceChange = (event) => {
     this.setState({
-      finalPrice: event.target.value
+      price: event.target.value
     },() =>{
     this.setState({
-      amount: this.state.finalPrice - this.state.finalDiscount
+      amount: this.state.price - this.state.discount
     });
     });
   }
   handleDiscountChange = (event) => {
       this.setState({
-        finalDiscount: event.target.value
+        discount: event.target.value
       },() => {
       this.setState({
-        amount: this.state.finalPrice - this.state.finalDiscount
+        amount: this.state.price - this.state.discount
       });
       });
     }
@@ -135,13 +174,12 @@ render() {
       <div className="table=row">
         <div align="centered">
           <div>
-          <form onSubmit={this.handleSubmit}>
           <Button
+                onClick={this.handleSubmit}
                 variant="danger" type="submit"
                >
                 Purchase Order
-              </Button>
-          </form>
+         </Button>
           </div>
         </div>
       </div>
