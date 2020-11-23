@@ -72,7 +72,7 @@ render() {
 				onChange={this.handleOnInputChange}
 		       />
 		       </label>
-		       <div>{this.state.filteredData.map(i=> <p>{i.name}</p>)}</div>
+		       <div>{this.state.filteredData.map((i) => <p>{i.id}</p>)}</div>
 		     </div>
 		    </div>
 		    <div className="table-row">
