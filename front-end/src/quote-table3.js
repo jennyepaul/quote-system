@@ -207,7 +207,7 @@ class QuoteTable extends React.Component {
                                 variant="danger" type="submit"
                             >
                                 Purchase Order
-         </Button>
+                            </Button>
                         </div>
                     </div>
                 </div>
