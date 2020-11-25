@@ -49,10 +49,46 @@ handleSubmit = (event) => {
 	);
        };
 
-handleAssociateChange = (event) => {
+handleEmailChange = (event) => {
   this.setState({
     customers: { ...this.state.customers, id: event.target.value }
   })
+}
+
+handleQuoteIdChange = (event) => {
+  this.setState({
+      quote: { ...this.state.quote, id: event.target.value }
+  })
+}
+
+getQuote = () => {
+  console.log(this.state.quote.id)
+  axios({
+      method: "get",
+      url: "http://localhost:3001/quote/" + this.state.quote.id,
+
+  }).then(
+      (response) => {
+          this.setState({
+              quote: {
+                  id: this.state.quote.id,
+                  name: response.data.name,
+                  secret_notes: response.data.secret_notes,
+                  customer_email: response.data.customer_email,
+                  discount: response.data.discount,
+                  price: response.data.price,
+                  sanctioned_unresolved: response.data.sanctioned_unresolved,
+                  final_price: response.data.final_price,
+                  description: response.data.description
+              },
+              firstDiscount: response.data.discount
+          })
+          console.log(response);
+      },
+      (error) => {
+          console.log(error);
+      }
+  );
 }
 
        getEmail = () => {
@@ -68,7 +104,7 @@ handleAssociateChange = (event) => {
                         id: this.state.customers.id,
                         name: response.data.name,
                         city: response.data.city,
-                        street: response.data.stret,
+                        street: response.data.street,
                         contact: response.data.contact,
                     },
                 })
@@ -200,9 +236,9 @@ render() {
             <div>
               <input
                 type="number"
-                value={this.state.customers.contact}
-                name="Customer Email"
-                onChange={this.handleAssociateChange}
+                value={this.state.quote.id}
+                name="Quote Id"
+                onChange={this.handleQuoteIDChange}
                 />
                 <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>
             </div>
