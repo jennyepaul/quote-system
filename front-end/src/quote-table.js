@@ -1,4 +1,5 @@
 //created by Jennifer Paul:11/9/20
+//functionality edited by Casey McDermott: 11/20/20
 import React from "react";
 import "./Page1.css";
 import axios from "axios";
@@ -10,14 +11,18 @@ class QuoteTable extends React.Component {
     super(props);
     this.state = {
     quote: {
+      id: 0,
       quote_name: ' ',
+      secret_notes: '',
+      discount:0,
       price: 0,
+      sanctioned_unresolved:'',
       description: '',
       secret_notes: '',
       customer_email: '',
   },
     customers: {
-      id:0,
+      id: 0,
       name:'',
       city: '',
       street: '',
@@ -49,7 +54,7 @@ handleSubmit = (event) => {
 	);
        };
 
-handleEmailChange = (event) => {
+handleCustomerIDChange = (event) => {
   this.setState({
     customers: { ...this.state.customers, id: event.target.value }
   })
@@ -92,15 +97,15 @@ getQuote = () => {
 }
 
        getEmail = () => {
-        console.log(this.state.customers.contact)
+        console.log(this.state.customers.id)
         axios({
             method: "get",
-            url: "http://blitz.cs.niu.edu/customers" + this.state.customers.contact,
+            url: "http://localhost:3001/customers/" + this.state.customers.id,
 
         }).then(
             (response) => {
                 this.setState({
-                    quote: {
+                    customers: {
                         id: this.state.customers.id,
                         name: response.data.name,
                         city: response.data.city,
@@ -236,9 +241,9 @@ render() {
             <div>
               <input
                 type="number"
-                value={this.state.quote.id}
-                name="Quote Id"
-                onChange={this.handleQuoteIDChange}
+                value={this.state.customers.id}
+                name="Customer Id"
+                onChange={this.handleCustomerIDChange}
                 />
                 <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>
             </div>
@@ -247,7 +252,8 @@ render() {
         <div className="container" style={{marginTop: "1em", marginBottom:"1em"}}>
           <div className="row">
             <div className="col">
-              Customer Email: {this.state.customers.contact}
+              Customer Contact: {this.state.customers.contact}
+                <div><b>*If no email address associated, please enter one below*</b></div>
             </div>
           </div>
           <div className="table">
@@ -266,7 +272,7 @@ render() {
               <div className="table-body">
                 <div className="table-row">
                   <div className="table-data">
-	 
+
                     <input
                       type="text"
                       name="quote_name"
@@ -286,7 +292,7 @@ render() {
                 <div className="table-row">
                   <div className="table-data">
                     <div>Description</div>
-                    <input 
+                    <input
                       type="text"
                       name="description"
                       value={this.state.description}
@@ -320,7 +326,7 @@ render() {
         <div className="table-body">
             <div className="table-row">
               <div className="table-data">
-	 
+
                 <input
                   type="text"
                   name="quote_name"
@@ -331,7 +337,7 @@ render() {
 
 	     </div>
               <div className="table-data">
-	
+
                 <input
 	  	    type="text"
                   name="price"
