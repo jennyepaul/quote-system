@@ -11,6 +11,7 @@ class QuoteTable extends React.Component {
             addDiscount: 0,
             firstDiscount: 0,
             finalPrice: 0,
+            associate_id: 0,
             quote: {
                 id: 0,
                 name: '',
@@ -23,10 +24,17 @@ class QuoteTable extends React.Component {
                 description: ''
             },
             quote_name: '',
-            order: '',
-            associate: '',
-            custid: '',
-            amount: 0,
+            purchase: {
+                order: '',
+                associate: '',
+                custid: '',
+                amount: 0,
+                name: '',
+                processDay: '',
+                commission: '',
+                timeStamp: '',
+                _id: ''
+            },
         };
     }
 
@@ -44,8 +52,6 @@ class QuoteTable extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-
-
         //the following blocks of code handle the post/put requests
         axios.put(
             "http://localhost:3001/quote/" + this.state.quote.id,
@@ -60,14 +66,16 @@ class QuoteTable extends React.Component {
             }
         );
 
-        /*axios({
+        /*
+        axios({
             method: "post",
             url: "http://blitz.cs.niu.edu/PurchaseOrder/",
             data: {
                 order: order,
                 associate: associate,
                 custid: custid,
-                amount: amount
+                amount: amount,
+                name: this.state.name
             }
         })
             .then(response => {
@@ -75,7 +83,21 @@ class QuoteTable extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-            }); */
+            });
+        */
+
+        axios.post(
+            "http://blitz.cs.niu.edu/PurchaseOrder/", + this.state.purchase,
+            this.state.purchase
+        ).then(
+            (response) => {
+                console.log(response);
+                window.location.reload();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     handleDiscountChange = (event) => {
@@ -91,6 +113,37 @@ class QuoteTable extends React.Component {
         })
     }
 
+    handleOrder = (event) => {
+        this.setState({
+            purchase: { ...this.state.quote, id: event.target.value }
+        })
+    }
+
+    handleAssociateChange = (event) => {
+        this.setState({
+            purchase: { ...this.state.purchase, associate: event.target.value }
+        })
+    }
+
+    /*postPurchase = () => {
+        console.log(this.state.purchase)
+        axios({
+            method: "post",
+            url: "http://blitz.cs.niu.edu/PurchaseOrder/" + this.state.purchase,
+        }).then(
+            (response) => {
+                this.setState({
+                    purchase: {
+                        order:this.state.purchase.order,
+
+                        
+                    }
+                })
+            }
+        )
+
+
+    }*/
     getQuote = () => {
         console.log(this.state.quote.id)
         axios({
@@ -121,6 +174,56 @@ class QuoteTable extends React.Component {
         );
     }
 
+    getAssociate = () => {
+        console.log(this.purchase.associate)
+        axios({
+            method: "get",
+            url: "http://localhost:3001/associate" + this.state.associate_id,
+
+        }).then(
+            (response) => {
+                this.setState({
+                    purchase: {
+                        associate: this.state.purchase.associate
+                    },
+                })
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    processOrder = () => {
+        console.log(this.state.purchase)
+        axios({
+            method: "post",
+            url: "http://blitz.cs.niu.edu/PurchaseOrder/" + this.state.purchase,
+
+        }).then(
+            (response) => {
+                this.setState({
+                    purchase: {
+                        order: this.state.response.data.order,
+                        associate: this.state.response.data.associate,
+                        custid: this.state.response.data.custid,
+                        amount: this.state.response.data.amount,
+                        name: response.data.name,
+                        processDay: response.data.processDay,
+                        commission: response.data.commission,
+                        timeStamp: response.data.timeStamp,
+                        _id: response.data._id
+                    },
+                })
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
     addDiscount = () => {
         let final_discount = Number(this.state.addDiscount) + Number(this.state.quote.discount)
         this.setState({
@@ -128,18 +231,56 @@ class QuoteTable extends React.Component {
         })
 
     }
+
+    getCustid = () => {
+        let custid = (this.state.purchase.custid = this.state.quote.id)
+        this.setState({
+            purchase: { ...this.state.purchase, custid, custid: this.state.purchase.custid = this.state.quote.id }
+        })
+
+    }
+
+    getAmount = () => {
+        let amount = Number(this.state.purchase.amount) + Number(this.state.quote.final_price)
+        this.setState({
+            purchase: { ...this.state.purchase, amount, amount: this.state.purchase.amount = this.state.quote.final_price }
+        })
+    }
     render() {
         return (
             <div className="table" >
                 <div className="table-title">Finalize Quote</div>
-                <div>Quote ID</div>
+                <div className="row">
+                    <div className="table-data">
+                        <div>Quote ID</div>
+                    </div>
+                    <div className="table-data">
+                        <div>Order</div>
+                    </div>
+                </div>
+                <div className="row">
+                    <input
+                        type="number"
+                        value={this.state.quote.id}
+                        name="Quote ID"
+                        onChange={this.handleQuoteIdChange}
+                    />
+                    <Button style={{ marginLeft: ".5em" }} onClick={this.getQuote}>Get Quote</Button>
+                    <input
+                        type="text"
+                        value={this.state.purchase.order}
+                        name="Order"
+                        onChange={this.handleOrder}
+                    />
+                </div>
+
                 <input
                     type="number"
-                    value={this.state.quote.id}
-                    name="Quote ID"
-                    onChange={this.handleQuoteIdChange}
+                    value={this.state.purchase.associate}
+                    name="Associate ID"
+                    onChange={this.handleAssociateChange}
                 />
-                <Button style= {{marginLeft: ".5em"}} onClick={this.getQuote}>Get Quote</Button>
+                <Button style={{ marginLeft: ".5em" }} onClick={this.getAssociate}>Get Associate</Button>
                 <div className="container" style={{ marginTop: "1em", marginBottom: "1em" }}>
                     <div className="row">
                         <div className="col">
@@ -180,7 +321,7 @@ class QuoteTable extends React.Component {
                                     name="discount"
                                     onChange={this.handleDiscountChange}
                                 />
-                                <Button style= {{marginLeft: ".5em"}} onClick={this.addDiscount}>Confirm</Button>
+                                <Button style={{ marginLeft: ".5em" }} onClick={this.addDiscount}>Confirm</Button>
 
                             </div>
                         </div>
@@ -211,6 +352,20 @@ class QuoteTable extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <div className="table=row">
+                    <h4>Purchase Order Processed</h4>
+                </div>
+
+                <div className="table-data"> Order: {this.state.purchase.order}</div>
+                <div className="table-data"> Associate: {this.state.purchase.associate}</div>
+                <div className="table-data"> Customer ID: {this.state.purchase.custid}</div>
+                <div className="table-data"> Amount: {this.state.purchase.amount}</div>
+                <div className="table-data"> Name: {this.state.purchase.name}</div>
+                <div className="table-data"> Process Day: {this.state.purchase.processDay}</div>
+                <div className="table-data"> Commission: {this.state.purchase.commission}</div>
+                <div className="table-data"> Time Stamp: {this.state.purchase.time}</div>
+                <div className="table-data"> ID: {this.state.purchase._id}</div>
             </div>
         )
     }
