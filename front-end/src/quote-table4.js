@@ -27,7 +27,7 @@ class QuoteTable4 extends React.Component {
     };
 
     getData = () => {
-      axios.get('http://localhost:3001/quote/')
+      fetch('http://localhost:3001/quote/')
 	.then(response => console.log(response))
 	.then(data => {
 		const { query } = this.state;
@@ -48,6 +48,7 @@ class QuoteTable4 extends React.Component {
 
 render() {
 	return (
+	
 	
 	 	<div className ="table">
 		 <div className="table-title">
@@ -72,7 +73,7 @@ render() {
 				onChange={this.handleOnInputChange}
 		       />
 		       </label>
-		       <div>{this.state.filteredData.map((i) => <p>{i.id}</p>)}</div>
+			 <div>{this.state.filteredData.map(i => <p>{i.id}</p>)}</div>		      
 		     </div>
 		    </div>
 		    <div className="table-row">
