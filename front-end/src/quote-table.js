@@ -16,12 +16,12 @@ class QuoteTable extends React.Component {
       secret_notes: '',
       customer_email: '',
   },
-    associate: {
+    customers: {
       id:0,
       name:'',
-      password: '',
-      commission: '',
-      address: ''
+      city: '',
+      street: '',
+      contact: ''
     }
   };
 }
@@ -51,31 +51,26 @@ handleSubmit = (event) => {
 
 handleAssociateChange = (event) => {
   this.setState({
-    associate: { ...this.state.associate, id: event.target.value }
+    customers: { ...this.state.customers, id: event.target.value }
   })
 }
 
-       getQuote = () => {
-        console.log(this.state.quote.id)
+       getEmail = () => {
+        console.log(this.state.customers.contact)
         axios({
             method: "get",
-            url: "http://localhost:3001/quote/" + this.state.quote.id,
+            url: "http://blitz.cs.niu.edu/customers" + this.state.customers.contact,
 
         }).then(
             (response) => {
                 this.setState({
                     quote: {
-                        id: this.state.quote.id,
+                        id: this.state.customers.id,
                         name: response.data.name,
-                        secret_notes: response.data.secret_notes,
-                        customer_email: response.data.customer_email,
-                        discount: response.data.discount,
-                        price: response.data.price,
-                        sanctioned_unresolved: response.data.sanctioned_unresolved,
-                        final_price: response.data.final_price,
-                        description: response.data.description
+                        city: response.data.city,
+                        street: response.data.stret,
+                        contact: response.data.contact,
                     },
-                    firstDiscount: response.data.discount
                 })
                 console.log(response);
             },
@@ -85,7 +80,7 @@ handleAssociateChange = (event) => {
         );
     }
 
-    getAssociate = () => {
+ /*   getAssociate = () => {
         console.log(this.state.associate.id)
         axios({
             method: "get",
@@ -108,7 +103,7 @@ handleAssociateChange = (event) => {
                 console.log(error);
             }
         );
-    }
+    }*/
 
 /*get the info/data from api
 componentDidMount = event => {
@@ -205,18 +200,18 @@ render() {
             <div>
               <input
                 type="number"
-                value={this.state.associate.id}
-                name="Associate ID"
+                value={this.state.customers.contact}
+                name="Customer Email"
                 onChange={this.handleAssociateChange}
                 />
-                <Button style={{marginLeft: ".5em"}} onClick={this.getAssociate}>Get Associate</Button>
+                <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>
             </div>
           </div>
         </div>
         <div className="container" style={{marginTop: "1em", marginBottom:"1em"}}>
           <div className="row">
             <div className="col">
-              Customer Email: {this.state.quote.customer_email}
+              Customer Email: {this.state.customers.contact}
             </div>
           </div>
           <div className="table">
