@@ -165,8 +165,8 @@ class QuoteTable2 extends React.Component {
               </div>
               <div className="table-row">
                 <div className="table-data">
+                  {/* <div>Customer Email:</div> */}
                   <div>Customer Email:</div>
-
                   <input
                     type="text"
                     name="customer_email"
