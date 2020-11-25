@@ -3,21 +3,30 @@ import React from "react";
 import "./Page1.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
-//import emailjs from "emailjs-com";
+//import { makeStyles } from "@material-ui/core";
 
 class QuoteTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    quote_name: ' ',
-    price: 0,
-    description: '',
-    secret_notes: '',
-    customer_email: '',
+    quote: {
+      quote_name: ' ',
+      price: 0,
+      description: '',
+      secret_notes: '',
+      customer_email: '',
+  },
+    associate: {
+      id:0,
+      name:'',
+      password: '',
+      commission: '',
+      address: ''
+    }
   };
 }
 
-   handleSubmit = (event) => {
+handleSubmit = (event) => {
 	event.preventDefault();
 	axios ({
 	  method: "post",
@@ -39,18 +48,67 @@ class QuoteTable extends React.Component {
 	  }
 	);
        };
-	
-handlePriceChange = (event) => {
-    this.setState({
-      price: event.target.value
-    },() =>{
-    this.setState({
-      amount: this.state.price - this.state.discount
-    });
-    });
-  }
 
+handleAssociateChange = (event) => {
+  this.setState({
+    associate: { ...this.state.associate, id: event.target.value }
+  })
+}
 
+       getQuote = () => {
+        console.log(this.state.quote.id)
+        axios({
+            method: "get",
+            url: "http://localhost:3001/quote/" + this.state.quote.id,
+
+        }).then(
+            (response) => {
+                this.setState({
+                    quote: {
+                        id: this.state.quote.id,
+                        name: response.data.name,
+                        secret_notes: response.data.secret_notes,
+                        customer_email: response.data.customer_email,
+                        discount: response.data.discount,
+                        price: response.data.price,
+                        sanctioned_unresolved: response.data.sanctioned_unresolved,
+                        final_price: response.data.final_price,
+                        description: response.data.description
+                    },
+                    firstDiscount: response.data.discount
+                })
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    getAssociate = () => {
+        console.log(this.state.associate.id)
+        axios({
+            method: "get",
+            url: "http://localhost:3001/associate/" + this.state.associate.id,
+
+        }).then(
+            (response) => {
+                this.setState({
+                    associate: {
+                      id: this.state.associate.id,
+                      name: response.data.name,
+                      password: response.data.password,
+                      commission: response.data.commission,
+                      address: response.data.address
+                    },
+                })
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
 
 /*get the info/data from api
 componentDidMount = event => {
@@ -141,6 +199,81 @@ handlePriceChange = (event) => {
 render() {
   return (
     <div className="table">
+      <div className="table-title">Look Up Email</div>
+        <div className="row">
+          <div className="table-data">Enter ID below
+            <div>
+              <input
+                type="number"
+                value={this.state.associate.id}
+                name="Associate ID"
+                onChange={this.handleAssociateChange}
+                />
+                <Button style={{marginLeft: ".5em"}} onClick={this.getAssociate}>Get Associate</Button>
+            </div>
+          </div>
+        </div>
+        <div className="container" style={{marginTop: "1em", marginBottom:"1em"}}>
+          <div className="row">
+            <div className="col">
+              Customer Email: {this.state.quote.customer_email}
+            </div>
+          </div>
+          <div className="table">
+            <div className="table-title">Enter a new sales quote...</div>
+              <div class-Name="table-content">
+                <div className="table-header">
+                  <div className="table-row">
+                    <div className="table-data">
+                      <div>Quote Name</div>
+                    </div>
+                    <div className="table-data">
+                      <div>Price</div>
+                    </div>
+                  </div>
+                </div>
+              <div className="table-body">
+                <div className="table-row">
+                  <div className="table-data">
+	 
+                    <input
+                      type="text"
+                      name="quote_name"
+                      value={this.state.quote_name}
+                      onChange={(event) => this.setState({quote_name: event.target.value})}
+                    />
+                  </div>
+                  <div className="table-data">
+                    <input
+                      type="text"
+                      name="price"
+                      value={this.state.price}
+                      onChange={(event) => this.handlePriceChange}
+                    />
+                  </div>
+                </div>
+                <div className="table-row">
+                  <div className="table-data">
+                    <div>Description</div>
+                    <input 
+                      type="text"
+                      name="description"
+                      value={this.state.description}
+                      onChange={(event) => this.setState({description: event.target.value})}
+                      />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  )
+}
+}
+
+  export default QuoteTable;
+/*    <div className="table">
       <div className="table-title">Enter a new sales quote...</div>
       <div className="table-content">
         <div className="table-header">
@@ -238,7 +371,7 @@ render() {
   )
 }
 }
-export default QuoteTable;
+export default QuoteTable;*/
 //        <div align="centered">
 //          <div>
 //              <Button
