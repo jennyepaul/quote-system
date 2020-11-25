@@ -4,7 +4,6 @@ import React from "react";
 import "./Page1.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
-//import { makeStyles } from "@material-ui/core";
 
 class QuoteTable extends React.Component {
   constructor(props) {
@@ -121,117 +120,6 @@ getQuote = () => {
         );
     }
 
- /*   getAssociate = () => {
-        console.log(this.state.associate.id)
-        axios({
-            method: "get",
-            url: "http://localhost:3001/associate/" + this.state.associate.id,
-
-        }).then(
-            (response) => {
-                this.setState({
-                    associate: {
-                      id: this.state.associate.id,
-                      name: response.data.name,
-                      password: response.data.password,
-                      commission: response.data.commission,
-                      address: response.data.address
-                    },
-                })
-                console.log(response);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-    }*/
-
-/*get the info/data from api
-componentDidMount = event => {
-axios.get('http://blitz.cs.niu.edu/PurchaseOrder/')
-   .then(response => {
-      console.log(response.data);
-  })
-    .catch(error => {
-      console.log(error);
-  });
-}
-
-handleSubmit = event => {
-    event.preventDefault();
-//handle quote_name
-  const quote_name = {
-    quote_name: this.state.quote_name
-  };
-//handle quote price
-  const price = {
-    price: this.state.price
-  };
-
-//handle quote description
-  const description = {
-      description: this.state.description
-    };
-
-//handle quote secret note
-  const secret_notes = {
-      secret_notes: this.state.secret_notes
-    };
-
-//handle customer email attached to quote
-  const customer_email = {
-      customer_email: this.state.customer_email
-    };
-
-  //the following blocks of code handle the post requests
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {quote_name})
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {price})
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {description})
-    .then(res => {
-    console.log(res);
-    console.log(res.data);
-    })
-
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {secret_notes})
-    .then(res => {
-    console.log(res);
-    console.log(res.data);
-    })
-
-  axios.post('http://blitz.cs.niu.edu/PurchaseOrder/', {customer_email})
-    .then(res => {
-    console.log(res);
-    console.log(res.data);
-    })
-}
-handlePriceChange = (event) => {
-    this.setState({
-      price: event.target.value
-    },() =>{
-    this.setState({
-      amount: this.state.price - this.state.discount
-    });
-    });
-  }
-  handleDiscountChange = (event) => {
-      this.setState({
-        discount: event.target.value
-      },() => {
-      this.setState({
-        amount: this.state.price - this.state.discount
-      });
-      });
-    }*/
-
 render() {
   return (
     <div className="table">
@@ -292,6 +180,7 @@ render() {
                 <div className="table-row">
                   <div className="table-data">
                     <div>Description</div>
+
                     <input
                       type="text"
                       name="description"
@@ -300,69 +189,7 @@ render() {
                       />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  )
-}
-}
-
-  export default QuoteTable;
-/*    <div className="table">
-      <div className="table-title">Enter a new sales quote...</div>
-      <div className="table-content">
-        <div className="table-header">
-          <div className="table-row">
-            <div className="table-data">
-              <div>Quote Name</div>
-            </div>
-            <div className="table-data">
-              <div>Price</div>
-            </div>
-          </div>
-        </div>
-        <div className="table-body">
-            <div className="table-row">
-              <div className="table-data">
-
-                <input
-                  type="text"
-                  name="quote_name"
-                  value={this.state.quote_name}
-                  onChange={(event) => this.setState({quote_name: event.target.value})}
-                />
-
-
-	     </div>
-              <div className="table-data">
-
-                <input
-	  	    type="text"
-                  name="price"
-                  value={this.state.price}
-                  onChange={this.handlePriceChange}
-                   />
-
-
-              </div>
-            </div>
-          <div className="table-row">
-            <div className="table-data">
-              <div>Description:</div>
-
-                <input
-                  type="text"
-                  name="description"
-                  value={this.state.description}
-                  onChange={(event) => this.setState({description: event.target.value})}
-                  />
-
-
-            </div>
-          </div>
-          <div className="table-row">
+                <div className="table-row">
             <div className="table-data">
               <div>Secret Notes:</div>
 
@@ -375,53 +202,44 @@ render() {
 
 
             </div>
-          </div>
-          <div className="table-row">
+              </div>
+                <div className="table-row">
+                  <div className="table-data">
+                    <div>Customer Email:</div>
+
+                      <input
+                        type="text"
+                        name="customer_email"
+                        value={this.state.customer_email}
+                        onChange={(event) => this.setState({customer_email: event.target.value})}
+                      />
+
+
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div className="table=row">
             <div className="table-data">
-              <div>Customer Email:</div>
-
-                  <input
-                  type="text"
-                  name="customer_email"
-                  value={this.state.customer_email}
-                  onChange={(event) => this.setState({customer_email: event.target.value})}
-                  />
-
-
+	            <div align ="left">
+	              <div>
+	                <Button variant="danger" onClick={this.handleSubmit}>Finalize Quote</Button>
+	              </div>
+                </div>
+              <div className="table-data">
+	              <div align="right">
+	            <div>
+	              <Button variant="secondary" href="./Page2">Next Page</Button>
+	            </div>
+	            </div>
+              </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="table=row">
-	  <div align ="left">
-	   <div>
-	    <Button variant="danger" onClick={this.handleSubmit}>Finalize Quote</Button>
-	   </div>
-	  <div align="right">
-	   <div>
-	     <Button variant="secondary" href="./Page2">Next Page</Button>
-	   </div>
-	  </div>
-	 </div>
-	</div>
-      </div>
   )
 }
 }
-export default QuoteTable;*/
-//        <div align="centered">
-//          <div>
-//              <Button
-//                variant="danger"
-//                href="./Page2"
-//               >
-//                Finalize Quote
-//              </Button>
-//          </div>
-//        </div>
-//      </div>
-//    </div>
-//  )
-//}
-//
-//export default QuoteTable;
+
+  export default QuoteTable;
