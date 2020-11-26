@@ -10,7 +10,7 @@ class QuoteTable extends React.Component {
             addDiscount: 0,
             firstDiscount: 0,
             finalPrice: 0,
-            id:'',
+            id: '',
             quote: {
                 id: 0,
                 name: '',
@@ -26,21 +26,27 @@ class QuoteTable extends React.Component {
             purchase: {
                 order: '',
                 associate: '',
-                custid: '',
+                custid: 0,
                 amount: 0,
+            },
+            associate: {
+                id: 0,
+                name: '',
+                password: '',
+                commission: '',
+                address: ''
+            },
+            purchaseResponse: {
+                order: '',
+                associate: '',
+                custid: '',
+                amount: '',
                 name: '',
                 processDay: '',
                 commission: '',
                 timeStamp: '',
-                _id: ''
+                _id: '',
             },
-            associate: {
-              id:0,
-              name:'',
-              password:'',
-              commission:'',
-              address: ''
-            }
         };
     }
 
@@ -65,40 +71,39 @@ class QuoteTable extends React.Component {
         ).then(
             (response) => {
                 console.log(response);
-                window.location.reload();
+                //window.location.reload();
             },
             (error) => {
                 console.log(error);
             }
         );
 
-        /*
-        axios({
-            method: "post",
-            url: "http://blitz.cs.niu.edu/PurchaseOrder/",
-            data: {
-                order: order,
-                associate: associate,
-                custid: custid,
-                amount: amount,
-                name: this.state.name
-            }
-        })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        */
-
         axios.post(
-            "http://blitz.cs.niu.edu/PurchaseOrder/", + this.state.purchase,
-            this.state.purchase
+            "http://blitz.cs.niu.edu/PurchaseOrder/",
+
+            {
+                order: this.state.purchase.order,
+                associate: this.state.purchase.associate,
+                custid: this.state.quote.id,
+                amount: this.state.quote.final_price
+            }
         ).then(
             (response) => {
+                this.setState({
+                    purchaseResponse: {
+                        order: response.data.order,
+                        associate: response.data.associate,
+                        custid: response.data.custid,
+                        amount: response.data.amount,
+                        name: response.data.name,
+                        processDay: response.data.processDay,
+                        commission: response.data.commission,
+                        timeStamp: response.data.timeStamp,
+                        _id: response.data._id
+                    },
+                })
                 console.log(response);
-                window.location.reload();
+                console.log(response.data);
             },
             (error) => {
                 console.log(error);
@@ -115,41 +120,25 @@ class QuoteTable extends React.Component {
 
     handleQuoteIdChange = (event) => {
         this.setState({
-            quote: { ...this.state.quote, id: event.target.value }
+            quote: { ...this.state.quote, id: event.target.value },
+            custid: { ...this.state.custid, id: event.target.value },
+            purchase: { ...this.state.purchase, custid: event.target.value }
         })
     }
 
     handleOrder = (event) => {
         this.setState({
-            purchase: { ...this.state.quote, id: event.target.value }
+            purchase: { ...this.state.quote, order: event.target.value }
         })
     }
 
     handleAssociateChange = (event) => {
         this.setState({
-            associate: { ...this.state.associate, id: event.target.value }
+            associate: { ...this.state.associate, id: event.target.value },
+            purchase: { ...this.state.purchase, associate: event.target.value }
         })
     }
 
-    /*postPurchase = () => {
-        console.log(this.state.purchase)
-        axios({
-            method: "post",
-            url: "http://blitz.cs.niu.edu/PurchaseOrder/" + this.state.purchase,
-        }).then(
-            (response) => {
-                this.setState({
-                    purchase: {
-                        order:this.state.purchase.order,
-
-
-                    }
-                })
-            }
-        )
-
-
-    }*/
     getQuote = () => {
         console.log(this.state.quote.id)
         axios({
@@ -190,40 +179,11 @@ class QuoteTable extends React.Component {
             (response) => {
                 this.setState({
                     associate: {
-                      id: this.state.associate.id,
-                      name: response.data.name,
-                      password: response.data.password,
-                      commission: response.data.commission,
-                      address: response.data.address
-                    },
-                })
-                console.log(response);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-    }
-
-    processOrder = () => {
-        console.log(this.state.purchase)
-        axios({
-            method: "post",
-            url: "http://blitz.cs.niu.edu/PurchaseOrder/" + this.state.purchase,
-
-        }).then(
-            (response) => {
-                this.setState({
-                    purchase: {
-                        order: this.state.response.data.order,
-                        associate: this.state.response.data.associate,
-                        custid: this.state.response.data.custid,
-                        amount: this.state.response.data.amount,
+                        id: this.state.associate.id,
                         name: response.data.name,
-                        processDay: response.data.processDay,
+                        password: response.data.password,
                         commission: response.data.commission,
-                        timeStamp: response.data.timeStamp,
-                        _id: response.data._id
+                        address: response.data.address
                     },
                 })
                 console.log(response);
@@ -243,65 +203,64 @@ class QuoteTable extends React.Component {
     }
 
     getCustid = () => {
-        let custid = (this.state.purchase.custid = this.state.quote.id)
+        let custid = (this.state.quote.id)
         this.setState({
-            purchase: { ...this.state.purchase, custid, custid: this.state.purchase.custid = this.state.quote.id }
+            purchase: { ...this.state.purchase, custid: this.state.purchase.custid = this.state.quote.id }
         })
 
     }
 
     getAmount = () => {
-        let amount = Number(this.state.purchase.amount) + Number(this.state.quote.final_price)
+        let amount = Number(this.state.quote.final_price)
         this.setState({
-            purchase: { ...this.state.purchase, amount, amount: this.state.purchase.amount = this.state.quote.final_price }
+            purchase: { ...this.state.purchase, amount: this.state.purchase.amount = this.state.quote.final_price }
         })
     }
     render() {
         return (
             <div className="table" >
-                <div className="table-title">Finalize Quote</div>
+                <div className="table-title">Finalize Quote & Convert to Purchase Order</div>
                 <div className="row">
                     <div className="table-data">
                         <div>Enter Quote ID</div>
                     </div>
                     <div className="table-data">
-                        <div>Order</div>
                     </div>
                 </div>
                 <div className="row">
-                  <div className = "table-data">
-                    <input
-                        type="number"
-                        value={this.state.quote.id}
-                        name="Quote ID"
-                        onChange={this.handleQuoteIdChange}
-                    />
-                    <Button style={{ marginLeft: ".5em" }} onClick={this.getQuote}>Get Quote</Button>
-                  </div>
+                    <div className="table-data">
+                        <input
+                            type="number"
+                            value={this.state.quote.id}
+                            name="Quote ID"
+                            onChange={this.handleQuoteIdChange}
+                        />
+                        <Button style={{ marginLeft: ".5em" }} onClick={this.getQuote}>Get Quote</Button>
+                    </div>
                 </div>
-                <div className = "row">
-                  <div className = "table-data">
-                    <div>Enter Order Number</div>
-                      <input
-                        type="text"
-                        value={this.state.purchase.order}
-                        name="Order"
-                        onChange={this.handleOrder}
+                <div className="row">
+                    <div className="table-data">
+                        <div>Enter Order Number</div>
+                        <input
+                            type="text"
+                            value={this.state.purchase.order}
+                            name="Order"
+                            onChange={this.handleOrder}
                         />
                     </div>
                 </div>
-                <div className = "row">
-                  <div className = "table-data">Enter Associate ID
+                <div className="row">
+                    <div className="table-data">Enter Associate ID
                     <div>
-                      <input
-                        type="number"
-                        value={this.state.associate.id}
-                        name="Associate ID"
-                        onChange={this.handleAssociateChange}
-                        />
-                        <Button style={{ marginLeft: ".5em" }} onClick={this.getAssociate}>Get Associate</Button>
+                            <input
+                                type="number"
+                                value={this.state.associate.id}
+                                name="Associate ID"
+                                onChange={this.handleAssociateChange}
+                            />
+                            <Button style={{ marginLeft: ".5em" }} onClick={this.getAssociate}>Get Associate</Button>
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div className="container" style={{ marginTop: "1em", marginBottom: "1em" }}>
                     <div className="row">
@@ -374,20 +333,23 @@ class QuoteTable extends React.Component {
                         </div>
                     </div>
                 </div>
-
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <div className="table=row">
                     <h4>Purchase Order Processed</h4>
                 </div>
 
-                <div className="table-data"> Order: {this.state.purchase.order}</div>
-                <div className="table-data"> Associate: {this.state.purchase.associate}</div>
-                <div className="table-data"> Customer ID: {this.state.purchase.custid}</div>
-                <div className="table-data"> Amount: {this.state.purchase.amount}</div>
-                <div className="table-data"> Name: {this.state.purchase.name}</div>
-                <div className="table-data"> Process Day: {this.state.purchase.processDay}</div>
-                <div className="table-data"> Commission: {this.state.purchase.commission}</div>
-                <div className="table-data"> Time Stamp: {this.state.purchase.time}</div>
-                <div className="table-data"> ID: {this.state.purchase._id}</div>
+                <div className="table-data"> Order: {this.state.purchaseResponse.order}</div>
+                <div className="table-data"> Associate: {this.state.purchaseResponse.associate}</div>
+                <div className="table-data"> Customer ID: {this.state.purchaseResponse.custid}</div>
+                <div className="table-data"> Amount: {this.state.purchaseResponse.amount}</div>
+                <div className="table-data"> Name: {this.state.purchaseResponse.name}</div>
+                <div className="table-data"> Process Day: {this.state.purchaseResponse.processDay}</div>
+                <div className="table-data"> Commission: {this.state.purchaseResponse.commission}</div>
+                <div className="table-data"> Time Stamp: {this.state.purchaseResponse.timeStamp}</div>
+                <div className="table-data"> ID: {this.state.purchaseResponse._id}</div>
             </div>
         )
     }
