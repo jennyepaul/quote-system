@@ -7,10 +7,10 @@ export default function Page3() {
 
     return(
 		<div className="Title">
-		<h1>ABC PLANT PARTS</h1>
-		<div className="Page">
+		  <h1>ABC PLANT PARTS</h1>
+		    <div className="Page">
 		  <QuoteTable />
-		</div>
+		    </div>
 	  </div>
 
     );
