@@ -2,7 +2,7 @@
 import React from "react";
 import QuoteTable2 from "./quote-table2.js";
 import "./Page2.css";
-import QuotesTable from './GetQuotesTable.js';
+import QuotesTable from './GetQuotesTable.js';      //imports functional components
 import EditQuoteTable from './EditQuotesTable.js';
 import DeleteQuoteTable from './DeleteQuotesTable.js';
 
@@ -11,7 +11,7 @@ function App() {
     <div className="Title">
       <h1>ABC PLANT PARTS</h1>
       <div className="Page">
-        <QuoteTable2 />
+        <QuoteTable2 />           {/*calls functional componenets*/}
         <EditQuoteTable/>
         <DeleteQuoteTable/>
         <QuotesTable/>

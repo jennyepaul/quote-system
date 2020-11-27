@@ -13,16 +13,16 @@ import {
   Switch
 } from "react-router-dom";
 
-function App() {
+function App() { //creates the routes to every page
   return (
     <div>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={Login} exact/>
-          <Route path="/Page1" component={Page1} exact/>
-          <Route path="/Page2" component={Page2} exact/>
-          <Route path="/Page3" component={Page3} exact/>
-	  <Route path="/Page4" component={Page4} exact/>
+          <Route path="/" component={Login} exact/>  {/*route to login page*/}
+          <Route path="/Page1" component={Page1} exact/> {/*route to page1*/}
+          <Route path="/Page2" component={Page2} exact/> {/*route to page2*/}
+          <Route path="/Page3" component={Page3} exact/> {/*route to page3*/}
+	        <Route path="/Page4" component={Page4} exact/> {/*route to page4*/}
         </Switch>
       </BrowserRouter>
     </div>

@@ -22,9 +22,10 @@ class QuoteTable2 extends React.Component {
     };
   }
 
+  // handles the send email functionality
   sendEmail = (e) => {
     e.preventDefault();
-    
+  // calss the emailjs library 
     emailjs
       .sendForm(
         "service_600dn2o",
@@ -41,13 +42,13 @@ class QuoteTable2 extends React.Component {
         }
       );
   };
-
+//handles submission of form
   handleSubmit = (event) => {
     event.preventDefault();
 
     axios({
       method: "post",
-      url: "http://localhost:3001/quote/",
+      url: "http://localhost:3001/quote/",      //posts data to quote table based on data
       data: {
         name: this.state.quote_name,
         secret_notes: this.state.secret_notes,
@@ -61,33 +62,33 @@ class QuoteTable2 extends React.Component {
     }).then(
       (response) => {
         console.log(response);
-        window.location.reload();
+        window.location.reload();             //relaods page
       },
       (error) => {
         console.log(error);
       }
     );
   };
-  handlePriceChange = (event) => {
+  handlePriceChange = (event) => {          //this handles the price change 
     this.setState(
       {
         price: event.target.value,
       },
       () => {
-        this.setState({
+        this.setState({                     //sets the final amount 
           amount: this.state.price - this.state.discount,
         });
       }
     );
   };
-  handleDiscountChange = (event) => {
+  handleDiscountChange = (event) => {       //handles discount change 
     this.setState(
       {
         discount: event.target.value,
       },
       () => {
         this.setState({
-          amount: this.state.price - this.state.discount,
+          amount: this.state.price - this.state.discount,   //sets the final amount 
         });
       }
     );
@@ -97,12 +98,12 @@ class QuoteTable2 extends React.Component {
     return (
       <div className="table">
         <form className="contact-form" onSubmit={this.sendEmail}>
-          <div className="table-title">Edit & Finalize Quote...</div>
+          <div className="table-title">Edit & Finalize Quote...</div>   {/*banner*/}
           <div className="table-content">
             <div className="table-header">
               <div className="table-row">
                 <div className="table-data">
-                  <div>Add New Quote</div>
+                  <div>Add New Quote</div>              {/*add quote banner*/}
                 </div>
               </div>
             </div>
@@ -110,7 +111,7 @@ class QuoteTable2 extends React.Component {
             <div className="table-body">
               <div className="table-row">
                 <div className="table-data">
-                  <div>Quote Name</div>
+                  <div>Quote Name</div>               {/*add quote name field*/}
 
                   <input
                     type="text"
@@ -125,7 +126,7 @@ class QuoteTable2 extends React.Component {
 
               <div className="table-row">
                 <div className="table-data">
-                  <div>Discount:</div>
+                  <div>Discount:</div>           {/*add quote discount field*/}
 
                   <input
                     type="text"
@@ -137,7 +138,7 @@ class QuoteTable2 extends React.Component {
               </div>
               <div className="table-row">
                 <div className="table-data">
-                  <div>Description:</div>
+                  <div>Description:</div>        {/*add quote description field*/}
 
                   <input
                     type="text"
@@ -151,7 +152,7 @@ class QuoteTable2 extends React.Component {
               </div>
               <div className="table-row">
                 <div className="table-data">
-                  <div>Secret Notes:</div>
+                  <div>Secret Notes:</div>         {/*add quote secret notes field*/}
 
                   <input
                     type="text"
@@ -165,8 +166,7 @@ class QuoteTable2 extends React.Component {
               </div>
               <div className="table-row">
                 <div className="table-data">
-                  {/* <div>Customer Email:</div> */}
-                  <div>Customer Email:</div>
+                  <div>Customer Email:</div>       {/*add quote customer email field*/}
                   <input
                     type="text"
                     name="customer_email"
@@ -179,7 +179,7 @@ class QuoteTable2 extends React.Component {
               </div>
               <div className="table-row">
                 <div className="table-data">
-                  <div>Price</div>
+                  <div>Price</div>                 {/*add quote price field*/}
 
                   <input
                     type="text"
@@ -193,7 +193,7 @@ class QuoteTable2 extends React.Component {
             <div className="table-footer">
               <div className="table-row">
                 <div className="table-data">
-                  <div>Total After Discount(Final Price):</div>
+                  <div>Total After Discount(Final Price):</div>   {/*banner*/}
                   <p>{this.state.amount}</p>
                 </div>
               </div>
@@ -201,7 +201,7 @@ class QuoteTable2 extends React.Component {
           </div>
           <div className="table=row">
             <div className="floated">
-              <div>
+              <div>                                         {/*button that sets add quote sanction field*/}
                 <Button
                   variant="success"
                   onClick={(event) =>
@@ -216,8 +216,8 @@ class QuoteTable2 extends React.Component {
               </div>
             </div>
             <div className="floated">
-              <div>
-                <Button
+              <div>                                      {/*button that sets add quote unresolved field*/}
+                <Button 
                   variant="danger"
                   onClick={(event) =>
                     this.setState({
@@ -233,17 +233,11 @@ class QuoteTable2 extends React.Component {
           </div>
           <br /> <br /> <br />
           <div className="floated">
-            <div>
-              {/* <Button value="Send" type="submit" onClick={this.sendEmail}>Add Quote</Button> */}
+            <div>                                          {/*button that SENDS QUOTE TO customer*/}
               <Button 
               variant="warning" 
               type="submit"
               value={this.state.final_price}
-              // onClick={(event) =>
-              //   this.setState({
-              //     final_price: 5,
-              //   })
-              // }
               >
                 Send Quote Email
               </Button>
@@ -254,8 +248,7 @@ class QuoteTable2 extends React.Component {
           <br />
           <div className="floated">
             <div>
-              {/* <Button value="Send" type="submit" onClick={this.sendEmail}>Add Quote</Button> */}
-              <Button onClick={this.handleSubmit}>Add Quote</Button>
+              <Button onClick={this.handleSubmit}>Add Quote</Button>     {/*button that posts quote*/}
             </div>
           </div>
         </form>
