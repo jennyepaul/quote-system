@@ -61,23 +61,24 @@ class QuoteTable extends React.Component {
             });
     }
 
+    //Submits the put and post requests
     handleSubmit = event => {
         event.preventDefault();
 
         //the following blocks of code handle the post/put requests
+        //Put request, updates the Quote database with the new discount and price
         axios.put(
             "http://localhost:3001/quote/" + this.state.quote.id,
             this.state.quote
         ).then(
             (response) => {
                 console.log(response);
-                //window.location.reload();
             },
             (error) => {
                 console.log(error);
             }
         );
-
+        //Post request to the url and takes back the response data
         axios.post(
             "http://blitz.cs.niu.edu/PurchaseOrder/",
 
@@ -110,14 +111,14 @@ class QuoteTable extends React.Component {
             }
         );
     }
-
+    //Handles the change in discount
     handleDiscountChange = (event) => {
         this.setState({
             addDiscount: event.target.value
         })
 
     }
-
+    //Handles the change in Quote ID
     handleQuoteIdChange = (event) => {
         this.setState({
             quote: { ...this.state.quote, id: event.target.value },
@@ -125,20 +126,20 @@ class QuoteTable extends React.Component {
             purchase: { ...this.state.purchase, custid: event.target.value }
         })
     }
-
+    //Handles the Order
     handleOrder = (event) => {
         this.setState({
             purchase: { ...this.state.quote, order: event.target.value }
         })
     }
-
+    //Handles the change in Associate
     handleAssociateChange = (event) => {
         this.setState({
             associate: { ...this.state.associate, id: event.target.value },
             purchase: { ...this.state.purchase, associate: event.target.value }
         })
     }
-
+    //Get request to get the quote info based on Quote ID
     getQuote = () => {
         console.log(this.state.quote.id)
         axios({
@@ -168,7 +169,7 @@ class QuoteTable extends React.Component {
             }
         );
     }
-
+    //Get request to get Associate data based on Associate ID
     getAssociate = () => {
         console.log(this.state.associate.id)
         axios({
@@ -194,6 +195,8 @@ class QuoteTable extends React.Component {
         );
     }
 
+    /*Add discount function: Add the new discount with the already existing quote discount 
+    together and then subtracts it from price to get the final price. Also sets the current state*/
     addDiscount = () => {
         let final_discount = Number(this.state.addDiscount) + Number(this.state.quote.discount)
         this.setState({
@@ -201,7 +204,7 @@ class QuoteTable extends React.Component {
         })
 
     }
-
+    //Get Customer ID
     getCustid = () => {
         let custid = (this.state.quote.id)
         this.setState({
@@ -209,13 +212,14 @@ class QuoteTable extends React.Component {
         })
 
     }
-
+    //Get Amount
     getAmount = () => {
         let amount = Number(this.state.quote.final_price)
         this.setState({
             purchase: { ...this.state.purchase, amount: this.state.purchase.amount = this.state.quote.final_price }
         })
     }
+    //Render, what will appear on the page
     render() {
         return (
             <div className="table" >
