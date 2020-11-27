@@ -123,123 +123,126 @@ getQuote = () => {
 render() {
   return (
     <div className="table">
-      <div className="table-title">Look Up Email</div>
-        <div className="row">
-          <div className="table-data">Enter ID below
-            <div>
+      <div className="table-title"> Look Up Email</div>
+      <div className="container" style={{marginTop: "1em,  marginBottom: 1em"}}>
+      <div className="row">
+        <div className="col">
+          Enter your ID Below:
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+        <div>
               <input
                 type="number"
                 value={this.state.customers.id}
                 name="Customer Id"
                 onChange={this.handleCustomerIDChange}
                 />
-                <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>
-            </div>
-          </div>
+                <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>         
         </div>
-        <div className="container" style={{marginTop: "1em", marginBottom:"1em"}}>
-          <div className="row">
-            <div className="col">
-              Customer Contact: {this.state.customers.contact}
-                <div><b>*If no email address associated, please enter one below*</b></div>
-            </div>
-          </div>
-          <div className="table">
-            <div className="table-title">Enter a new sales quote...</div>
-              <div class-Name="table-content">
-                <div className="table-header">
-                  <div className="table-row">
-                    <div className="table-data">
-                      <div>Quote Name</div>
-                    </div>
-                    <div className="table-data">
-                      <div>Price</div>
-                    </div>
-                  </div>
-                </div>
-              <div className="table-body">
-                <div className="table-row">
-                  <div className="table-data">
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+        Customer Contact: {this.state.customers.contact}
+                <div><b>*If no email address associated, please enter one below*</b></div>          
+        </div>
+      </div>
+      <div className="row">
+        ___________________________________________________________________________________________________________________________
+      </div>
 
-                    <input
+      <div className="row">
+        <div className="col">
+        Enter a New Sales Quote.....
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+        Quote Name 
+        </div>
+        <div className="col">
+        Price
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <input
                       type="text"
                       name="quote_name"
                       value={this.state.quote_name}
                       onChange={(event) => this.setState({quote_name: event.target.value})}
-                    />
-                  </div>
-                  <div className="table-data">
-                    <input
+          />
+        </div>
+        <div className="col">
+          <input
                       type="text"
                       name="price"
                       value={this.state.price}
                       onChange={(event) => this.handlePriceChange}
-                    />
-                  </div>
-                </div>
-                <div className="table-row">
-                  <div className="table-data">
-                    <div>Description</div>
-
-                    <input
+          />          
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          Description:
+        </div>
+        <div className="col">
+          Secret Notes:
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+        <input
                       type="text"
                       name="description"
                       value={this.state.description}
                       onChange={(event) => this.setState({description: event.target.value})}
                       />
-                  </div>
-                </div>
-                <div className="table-row">
-            <div className="table-data">
-              <div>Secret Notes:</div>
-
-                  <input
+        </div>
+        <div className="col">
+        <input
                   type="text"
                   name="secret_notes"
                   value={this.state.secret_notes}
                   onChange={(event) => this.setState({secret_notes: event.target.value})}
-                  />
-
-
-            </div>
-              </div>
-                <div className="table-row">
-                  <div className="table-data">
-                    <div>Customer Email:</div>
-
-                      <input
+                  />         
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          Customer Email:
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+        <input
                         type="text"
                         name="customer_email"
                         value={this.state.customer_email}
                         onChange={(event) => this.setState({customer_email: event.target.value})}
                       />
-
-
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div className="table=row">
-            <div className="table-data">
-	            <div align ="left">
-	              <div>
-	                <Button variant="danger" onClick={this.handleSubmit}>Finalize Quote</Button>
-	              </div>
-                </div>
-              <div className="table-data">
-	              <div align="right">
-	            <div>
-	              <Button variant="secondary" href="./Page2">Next Page</Button>
-	            </div>
-	            </div>
-              </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+      <div className="row">
+        ___________________________________________________________________________________________________________________________
+      </div>      
+      <div className="row">
+        <div className="col">
+        <div>
+	                <Button variant="danger" onClick={this.handleSubmit}>Finalize Quote</Button>
+	      </div>       
+        </div>
+        <div className="col">
+        <div>
+	              <Button variant="secondary" href="./Page2">Next Page</Button>
+	            </div>
+        </div>
+      </div>
+      </div>
+      </div>      
   )
 }
 }
-
-  export default QuoteTable;
+export default QuoteTable;
