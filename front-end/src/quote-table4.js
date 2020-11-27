@@ -115,13 +115,11 @@ render () {
 					onChange={this.handleAssociateIdChange}
 				/>
 				<Button style = {{ marginLeft: ".5em"  }} onClick={this.getAssociateInfo}>Get Associate Info</Button>
+				<div><b>*If no information shown, there is no Associate found. Please enter another ID.*</b></div>
 				</div>
 				</div>
 			<div className="container" style={{marginTop: "1em, marginBottom: 1em"}}>
 				<div className="row">
-					<div className="col">
-						Associate ID: {this.state.associate.id}
-					</div>
 					<div className="col">
 						Associate Name:	{this.state.associate.name}
 					</div>
@@ -153,14 +151,12 @@ render () {
 					name="Quote ID"
 					onChange={this.handleQuoteIdChange}
 				/>
-				<Button style = {{ marginLeft: ".5em"  }} onClick={this.getAssociateInfo}>Get Associate Info</Button>
+				<Button style = {{ marginLeft: ".5em"  }} onClick={this.getQuote}>Get Associate Info</Button>
+				<div><b>*If no information shown, there is no Quote found. Please enter another ID.*</b></div>
 				</div>
 				</div>
 			<div className="container" style={{marginTop: "1em, marginBottom: 1em"}}>
 				<div className="row">
-					<div className="col">
-						Quote ID: {this.state.quote.id}
-					</div>
 					<div className="col">
 						Quote Name:	{this.state.quote.name}
 					</div>
