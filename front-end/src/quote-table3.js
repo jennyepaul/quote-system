@@ -83,7 +83,7 @@ class QuoteTable extends React.Component {
 
             {
                 order: this.state.purchase.order,
-                associate: this.state.purchase.associate,
+                associate: this.state.associate.name,
                 custid: this.state.quote.id,
                 amount: this.state.quote.final_price
             }
