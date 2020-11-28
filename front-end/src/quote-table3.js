@@ -337,6 +337,11 @@ class QuoteTable extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="table=row">
+                    <div align="right">
+                        <Button variant="secondary" href="./Page4">Next Page</Button>
+                    </div>
+                </div>
                 <br></br>
                 <br></br>
                 <br></br>
