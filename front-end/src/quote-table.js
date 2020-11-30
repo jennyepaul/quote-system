@@ -17,7 +17,6 @@ class QuoteTable extends React.Component {
       price: 0,
       sanctioned_unresolved:'',
       description: '',
-      secret_notes: '',
       customer_email: '',
   },
     customers: {
@@ -30,7 +29,7 @@ class QuoteTable extends React.Component {
   };
 }
 
-handleSubmit = (event) => {
+handleSubmit = (event) => {                        //sends quote information to quote database
 	event.preventDefault();
 	axios ({
 	  method: "post",
@@ -53,7 +52,7 @@ handleSubmit = (event) => {
 	);
        };
 
-handleCustomerIDChange = (event) => {
+handleCustomerIDChange = (event) => {             //handles input of id
   this.setState({
     customers: { ...this.state.customers, id: event.target.value }
   })
@@ -95,7 +94,7 @@ getQuote = () => {
   );
 }
 
-       getEmail = () => {
+       getEmail = () => {                       //retrieves the email from the customers database
         console.log(this.state.customers.id)
         axios({
             method: "get",
@@ -180,7 +179,7 @@ render() {
                       type="text"
                       name="price"
                       value={this.state.price}
-                      onChange={(event) => this.handlePriceChange}
+                      onChange={(event) => this.setState({price: event.target.value})}
           />
         </div>
       </div>
