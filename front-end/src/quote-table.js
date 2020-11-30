@@ -17,7 +17,7 @@ class QuoteTable extends React.Component {
       price: 0,
       sanctioned_unresolved:'',
       description: '',
-      secret_notes: '',
+//      secret_notes: '',
       customer_email: '',
   },
     customers: {
