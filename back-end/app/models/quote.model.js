@@ -44,7 +44,7 @@ Quote.findById = (quoteId, result) => {
       return;
     }
 
-    // not found associate with the id
+    // not found quote with the id
     result({ kind: "not_found" }, null);
   });
 };
@@ -76,7 +76,7 @@ Quote.updateById = (id, quote, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found associate with the id
+        // not found quote with the id
         result({ kind: "not_found" }, null);
         return;
       }

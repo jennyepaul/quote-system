@@ -1,5 +1,5 @@
 //created by Jennifer Paul:11/9/20
-//functionality edited by Casey McDermott: 11/20/20
+//functionality & layout edited by Casey McDermott: 11/20/20
 import React from "react";
 import "./Page1.css";
 import axios from "axios";
@@ -139,14 +139,14 @@ render() {
                 name="Customer Id"
                 onChange={this.handleCustomerIDChange}
                 />
-                <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>         
+                <Button style={{marginLeft: ".5em"}} onClick={this.getEmail}>Get Email</Button>
         </div>
         </div>
       </div>
       <div className="row">
         <div className="col">
         Customer Contact: {this.state.customers.contact}
-                <div><b>*If no email address associated, please enter one below*</b></div>          
+                <div><b>*If no email address associated, please enter one below*</b></div>
         </div>
       </div>
       <div className="row">
@@ -160,7 +160,7 @@ render() {
       </div>
       <div className="row">
         <div className="col">
-        Quote Name 
+        Quote Name
         </div>
         <div className="col">
         Price
@@ -181,7 +181,7 @@ render() {
                       name="price"
                       value={this.state.price}
                       onChange={(event) => this.handlePriceChange}
-          />          
+          />
         </div>
       </div>
       <div className="row">
@@ -207,7 +207,7 @@ render() {
                   name="secret_notes"
                   value={this.state.secret_notes}
                   onChange={(event) => this.setState({secret_notes: event.target.value})}
-                  />         
+                  />
         </div>
       </div>
       <div className="row">
@@ -227,12 +227,12 @@ render() {
       </div>
       <div className="row">
         ___________________________________________________________________________________________________________________________
-      </div>      
+      </div>
       <div className="row">
         <div className="col">
         <div>
 	                <Button variant="danger" onClick={this.handleSubmit}>Finalize Quote</Button>
-	      </div>       
+	      </div>
         </div>
         <div className="col">
         <div>
@@ -241,7 +241,7 @@ render() {
         </div>
       </div>
       </div>
-      </div>      
+      </div>
   )
 }
 }
