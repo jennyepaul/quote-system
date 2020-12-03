@@ -3,7 +3,7 @@ import "./Page4.css";
 import axios from "axios";
 import { Button,} from "react-bootstrap";
 
-class QuoteTable extends React.Component {
+class QuoteTable extends React.Component {			//constructor for associate and quote
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,20 +29,20 @@ class QuoteTable extends React.Component {
 	}
 
 
-handleAssociateIdChange = (event) => {
+handleAssociateIdChange = (event) => {					//handles input id of associate
 	this.setState({
 		associate: { ...this.state.associate, id: event.target.value }
 
 	})
 }
 
-handleQuoteIdChange = (event) => {
+handleQuoteIdChange = (event) => {						//handles input id of quote 
 	this.setState({
 		quote: { ...this.state.quote, id: event.target.value },
 	})
 }
 
-getAssociateInfo = () => {
+getAssociateInfo = () => {								//retrieves the associate info from associate database
 	console.log(this.state.associate.id)
 	axios({
 		method: "get",
@@ -67,7 +67,7 @@ getAssociateInfo = () => {
 	);
 }
 
-getQuote = () => {
+getQuote = () => {										//retrieves quote information from quote database
 	console.log(this.state.quote.id)
 	axios({
 		method: "get",

@@ -64,7 +64,7 @@ handleQuoteIdChange = (event) => {
   })
 }
 
-getQuote = () => {
+getQuote = () => {                            //retrieves the quote information 
   console.log(this.state.quote.id)
   axios({
       method: "get",
