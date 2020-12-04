@@ -1,0 +1,25 @@
+{
+  "name": "quote-system",
+  "version": "1.0.0",
+  "description": "QUOTE SYSTEM:",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "emailjs-com": "^2.6.4",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jennyepaul/quote-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jennyepaul/quote-system/issues"
+  },
+  "homepage": "https://github.com/jennyepaul/quote-system#readme"
+}
