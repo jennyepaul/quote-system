@@ -2,8 +2,8 @@
 
 //connects to internal database
 module.exports = {
-  HOST: "ec2-3-139-163-138.us-east-2.compute.amazonaws.com",
+  HOST: "ec2-3-128-61-244.us-east-2.compute.amazonaws.com",
   USER: "jp-niu",
-  PASSWORD: "Jpniu11162020!",
+  PASSWORD: "jpniupassword",
   DB: "csci467"
 };
